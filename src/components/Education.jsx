@@ -7,6 +7,13 @@ const fields = [
 	{ label: 'Graduation Date', name: 'graduationDate', type: 'number' },
 ];
 
+const createEmptyEducation = () => {
+	return fields.reduce((acc, field) => {
+		acc[field.name] = '';
+		return acc;
+	}, {});
+};
+
 function EducationItem({ item, index, onChange }) {
 	const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -22,10 +29,11 @@ function EducationItem({ item, index, onChange }) {
 	if (isSubmitted) {
 		return (
 			<div>
-				<h2>Degree: {item.degree}</h2>
-				<p>School Name: {item.institution}</p>
-				<p>Start Date: {item.startDate}</p>
-				<p>Graduation Date: {item.graduationDate}</p>
+				{fields.map((field) => (
+					<p key={field.name}>
+						<strong>{field.label}:</strong> {item[field.name]}
+					</p>
+				))}
 
 				<button type="button" onClick={handleEdit}>
 					Edit
@@ -81,15 +89,7 @@ function Education() {
 
 			<button
 				onClick={() =>
-					setEducations([
-						...educations,
-						{
-							degree: '',
-							institution: '',
-							startDate: '',
-							graduationDate: '',
-						},
-					])
+					setEducations([...educations, createEmptyEducation()])
 				}
 			>
 				Add Education
