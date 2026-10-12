@@ -8,10 +8,12 @@ const fields = [
 ];
 
 const createEmptyEducation = () => {
-	return fields.reduce((acc, field) => {
+	const emptyObj = fields.reduce((acc, field) => {
 		acc[field.name] = '';
 		return acc;
 	}, {});
+
+	return { ...emptyObj, id: crypto.randomUUID() };
 };
 
 function EducationItem({ item, index, onChange, onDelete }) {
@@ -38,7 +40,7 @@ function EducationItem({ item, index, onChange, onDelete }) {
 				<button type="button" onClick={handleEdit}>
 					Edit
 				</button>
-				<button type="button" onClick={() => onDelete(index)}>
+				<button type="button" onClick={() => onDelete(item.id)}>
 					X
 				</button>
 			</div>
@@ -59,7 +61,7 @@ function EducationItem({ item, index, onChange, onDelete }) {
 				</div>
 			))}
 			<button type="submit">Save</button>
-			<button type="button" onClick={() => onDelete(index)}>
+			<button type="button" onClick={() => onDelete(item.id)}>
 				X
 			</button>
 		</form>
@@ -81,9 +83,9 @@ function Education() {
 		});
 	};
 
-	const handleDelete = (indexToDelete) => {
+	const handleDelete = (idToDelete) => {
 		setEducations((prevEducations) =>
-			prevEducations.filter((_, index) => index != indexToDelete)
+			prevEducations.filter((edu) => edu.id != idToDelete)
 		);
 	};
 
@@ -92,9 +94,10 @@ function Education() {
 			<h2>Education</h2>
 			{educations.map((edu, index) => (
 				<EducationItem
-					key={index}
+					key={edu.id}
 					item={edu}
 					index={index}
+					id={edu.id}
 					onChange={handleChange}
 					onDelete={handleDelete}
 				/>
