@@ -14,6 +14,7 @@ function Person() {
 		email: '',
 		phone: '',
 	});
+
 	const [isSubmitted, setIsSubmitted] = useState(false);
 
 	const handleChange = (e) => {
