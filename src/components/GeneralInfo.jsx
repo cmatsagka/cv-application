@@ -1,5 +1,12 @@
 import { useState } from 'react';
 
+const fields = [
+	{ label: 'First Name', name: 'firstName', type: 'text' },
+	{ label: 'Last Name', name: 'lastName', type: 'text' },
+	{ label: 'Email', name: 'email', type: 'text' },
+	{ label: 'Phone', name: 'phone', type: 'text' },
+];
+
 function Person() {
 	const [person, setPerson] = useState({
 		firstName: 'Nemo',
@@ -23,45 +30,18 @@ function Person() {
 			</h1>
 			<p>Email: {person.email}</p>
 			<p>Phone: {person.phone}</p>
-			<div>
-				<label>First Name:</label>
-				<input
-					type="text"
-					name="firstName"
-					value={person.firstName}
-					onChange={handleChange}
-				/>
-			</div>
 
-			<div>
-				<label>Last Name:</label>
-				<input
-					type="text"
-					name="lastName"
-					value={person.lastName}
-					onChange={handleChange}
-				/>
-			</div>
-
-			<div>
-				<label>Email:</label>
-				<input
-					type="text"
-					name="email"
-					value={person.email}
-					onChange={handleChange}
-				/>
-			</div>
-
-			<div>
-				<label>Phone:</label>
-				<input
-					type="text"
-					name="phone"
-					value={person.phone}
-					onChange={handleChange}
-				/>
-			</div>
+			{fields.map((field) => (
+				<div key={field.name}>
+					<label>{field.label}:</label>
+					<input
+						type={field.type}
+						name={field.name}
+						value={person[field.name]}
+						onChange={handleChange}
+					/>
+				</div>
+			))}
 		</div>
 	);
 }
