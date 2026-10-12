@@ -7,23 +7,8 @@ const fields = [
 	{ label: 'Graduation Date', name: 'graduationDate', type: 'number' },
 ];
 
-function EducationItem() {
-	const [study, setStudy] = useState({
-		degree: '',
-		institution: '',
-		startDate: '',
-		graduationDate: '',
-	});
-
+function EducationItem({ item, index, onChange }) {
 	const [isSubmitted, setIsSubmitted] = useState(false);
-
-	const handleChange = (e) => {
-		const { name, value } = e.target;
-		setStudy((prev) => ({
-			...prev,
-			[name]: value,
-		}));
-	};
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -37,10 +22,10 @@ function EducationItem() {
 	if (isSubmitted) {
 		return (
 			<div>
-				<h2>Degree: {study.degree}</h2>
-				<p>School Name: {study.institution}</p>
-				<p>Start Date: {study.startDate}</p>
-				<p>Graduation Date: {study.graduationDate}</p>
+				<h2>Degree: {item.degree}</h2>
+				<p>School Name: {item.institution}</p>
+				<p>Start Date: {item.startDate}</p>
+				<p>Graduation Date: {item.graduationDate}</p>
 
 				<button type="button" onClick={handleEdit}>
 					Edit
@@ -57,8 +42,8 @@ function EducationItem() {
 					<input
 						type={field.type}
 						name={field.name}
-						value={study[field.name]}
-						onChange={handleChange}
+						value={item[field.name]}
+						onChange={(e) => onChange(index, e)}
 					/>
 				</div>
 			))}
@@ -68,10 +53,47 @@ function EducationItem() {
 }
 
 function Education() {
+	const [educations, setEducations] = useState([]);
+
+	const handleChange = (index, e) => {
+		const { name, value } = e.target;
+		setEducations((prevEducations) => {
+			const updated = [...prevEducations];
+			updated[index] = {
+				...updated[index],
+				[name]: value,
+			};
+			return updated;
+		});
+	};
+
 	return (
 		<div className="education">
 			<h2>Education</h2>
-			<EducationItem />
+			{educations.map((edu, index) => (
+				<EducationItem
+					key={index}
+					item={edu}
+					index={index}
+					onChange={handleChange}
+				/>
+			))}
+
+			<button
+				onClick={() =>
+					setEducations([
+						...educations,
+						{
+							degree: '',
+							institution: '',
+							startDate: '',
+							graduationDate: '',
+						},
+					])
+				}
+			>
+				Add Education
+			</button>
 		</div>
 	);
 }
