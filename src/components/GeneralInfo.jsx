@@ -14,6 +14,7 @@ function Person() {
 		email: '',
 		phone: '',
 	});
+	const [isSubmitted, setIsSubmitted] = useState(false);
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
@@ -23,17 +24,35 @@ function Person() {
 		}));
 	};
 
-	return (
-		<div>
-			<h1>
-				Full Name: {person.firstName} {person.lastName}
-			</h1>
-			<p>Email: {person.email}</p>
-			<p>Phone: {person.phone}</p>
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		setIsSubmitted(true);
+	};
 
+	const handleEdit = () => {
+		setIsSubmitted(false);
+	};
+
+	if (isSubmitted) {
+		return (
+			<div>
+				<h1>
+					Full Name: {person.firstName} {person.lastName}
+				</h1>
+				<p>Email: {person.email}</p>
+				<p>Phone: {person.phone}</p>
+				<button type="button" onClick={handleEdit}>
+					Edit
+				</button>
+			</div>
+		);
+	}
+
+	return (
+		<form onSubmit={handleSubmit}>
 			{fields.map((field) => (
 				<div key={field.name}>
-					<label>{field.label}:</label>
+					<label>{field.label}: </label>
 					<input
 						type={field.type}
 						name={field.name}
@@ -42,7 +61,8 @@ function Person() {
 					/>
 				</div>
 			))}
-		</div>
+			<button type="submit">Save</button>
+		</form>
 	);
 }
 
@@ -50,7 +70,6 @@ function GeneralInfo() {
 	return (
 		<div className="general-info">
 			<h2>General Information</h2>
-
 			<Person />
 		</div>
 	);
