@@ -14,7 +14,7 @@ const createEmptyEducation = () => {
 	}, {});
 };
 
-function EducationItem({ item, index, onChange }) {
+function EducationItem({ item, index, onChange, onDelete }) {
 	const [isSubmitted, setIsSubmitted] = useState(false);
 
 	const handleSubmit = (e) => {
@@ -38,6 +38,9 @@ function EducationItem({ item, index, onChange }) {
 				<button type="button" onClick={handleEdit}>
 					Edit
 				</button>
+				<button type="button" onClick={() => onDelete(index)}>
+					X
+				</button>
 			</div>
 		);
 	}
@@ -56,6 +59,9 @@ function EducationItem({ item, index, onChange }) {
 				</div>
 			))}
 			<button type="submit">Save</button>
+			<button type="button" onClick={() => onDelete(index)}>
+				X
+			</button>
 		</form>
 	);
 }
@@ -75,6 +81,12 @@ function Education() {
 		});
 	};
 
+	const handleDelete = (indexToDelete) => {
+		setEducations((prevEducations) =>
+			prevEducations.filter((_, index) => index != indexToDelete)
+		);
+	};
+
 	return (
 		<div className="education">
 			<h2>Education</h2>
@@ -84,6 +96,7 @@ function Education() {
 					item={edu}
 					index={index}
 					onChange={handleChange}
+					onDelete={handleDelete}
 				/>
 			))}
 
