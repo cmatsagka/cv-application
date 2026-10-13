@@ -85,7 +85,7 @@ function Education() {
 
 	const handleDelete = (idToDelete) => {
 		setEducations((prevEducations) =>
-			prevEducations.filter((edu) => edu.id != idToDelete)
+			prevEducations.filter((edu) => edu.id !== idToDelete)
 		);
 	};
 
