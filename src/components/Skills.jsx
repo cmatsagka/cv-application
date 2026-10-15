@@ -40,13 +40,15 @@ function SkillCategoryItem({
 	if (isSubmitted) {
 		return (
 			<div>
-				<h3>{item.categoryTitle}</h3>
-				<button type="button" onClick={handleEdit}>
-					Edit
-				</button>
-				<button type="button" onClick={() => onDelete(item.id)}>
-					X
-				</button>
+				<div>
+					<h3>{item.categoryTitle}</h3>
+					<button type="button" onClick={handleEdit}>
+						Edit
+					</button>
+					<button type="button" onClick={() => onDelete(item.id)}>
+						X
+					</button>
+				</div>
 				<div>
 					{item.skills.map((skill, skillIndex) => (
 						<SkillItem
@@ -61,7 +63,7 @@ function SkillCategoryItem({
 				</div>
 
 				<button type="button" onClick={() => onAdd(index)}>
-					Add Skill
+					+ Skill
 				</button>
 			</div>
 		);
@@ -77,12 +79,11 @@ function SkillCategoryItem({
 					value={item.categoryTitle}
 					onChange={(e) => onChange(index, e)}
 				/>
+				<button type="submit">Save</button>
+				<button type="button" onClick={() => onDelete(item.id)}>
+					X
+				</button>
 			</div>
-
-			<button type="submit">Save</button>
-			<button type="button" onClick={() => onDelete(item.id)}>
-				X
-			</button>
 		</form>
 	);
 }
@@ -230,7 +231,7 @@ function Skills() {
 					setCategory([...category, createEmptyCategory()])
 				}
 			>
-				Add Skill Category
+				+ Category
 			</button>
 		</div>
 	);
