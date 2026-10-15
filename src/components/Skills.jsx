@@ -24,6 +24,7 @@ function SkillCategoryItem({
 	onDelete,
 	onAdd,
 	onSkillChange,
+	onDeleteSkill,
 }) {
 	const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -40,29 +41,36 @@ function SkillCategoryItem({
 		return (
 			<div>
 				<h3>{item.categoryTitle}</h3>
-
-				{item.skills.map((skill, skillIndex) => (
-					<div key={skill.id}>
-						<input
-							type="text"
-							name="skillName"
-							value={skill.skillName}
-							onChange={(e) =>
-								onSkillChange(index, skillIndex, e)
-							}
-							placeholder="e.g. React"
-						/>
-					</div>
-				))}
-
-				<button type="button" onClick={() => onAdd(index)}>
-					Add Skill
-				</button>
 				<button type="button" onClick={handleEdit}>
 					Edit
 				</button>
 				<button type="button" onClick={() => onDelete(item.id)}>
 					X
+				</button>
+				<div>
+					{item.skills.map((skill, skillIndex) => (
+						<div key={skill.id}>
+							<input
+								type="text"
+								name="skillName"
+								value={skill.skillName}
+								onChange={(e) =>
+									onSkillChange(index, skillIndex, e)
+								}
+								placeholder="e.g. React"
+							/>
+							<button
+								type="button"
+								onClick={() => onDeleteSkill(index, skill.id)}
+							>
+								X
+							</button>
+						</div>
+					))}
+				</div>
+
+				<button type="button" onClick={() => onAdd(index)}>
+					Add Skill
 				</button>
 			</div>
 		);
@@ -120,6 +128,22 @@ function Skills() {
 		});
 	};
 
+	const handleDeleteSkill = (categoryIndex, skillId) => {
+		setCategory((prevCategories) => {
+			const updated = [...prevCategories];
+			const updatedCategory = {
+				...updated[categoryIndex],
+			};
+
+			updatedCategory.skills = updatedCategory.skills.filter(
+				(skill) => skill.id !== skillId
+			);
+
+			updated[categoryIndex] = updatedCategory;
+			return updated;
+		});
+	};
+
 	const handleSkillChange = (categoryIndex, skillIndex, e) => {
 		const { name, value } = e.target;
 		setCategory((prevCategories) => {
@@ -151,6 +175,7 @@ function Skills() {
 					onDelete={handleDelete}
 					onAdd={handleAddSkill}
 					onSkillChange={handleSkillChange}
+					onDeleteSkill={handleDeleteSkill}
 				/>
 			))}
 
