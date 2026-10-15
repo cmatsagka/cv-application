@@ -2,6 +2,9 @@ import { useState } from 'react';
 
 const fields = [
 	{ label: 'Title', name: 'title', type: 'text' },
+	{ label: 'Provider / Platform', name: 'platform', type: 'text' },
+	{ label: 'Date', name: 'date', type: 'text' },
+	{ label: 'Credential Link', name: 'link', type: 'url' },
 	{ label: 'Description', name: 'description', type: 'text' },
 ];
 
@@ -10,7 +13,6 @@ const createEmptyLearning = () => {
 		acc[field.name] = '';
 		return acc;
 	}, {});
-
 	return { ...emptyObj, id: crypto.randomUUID() };
 };
 
@@ -29,11 +31,15 @@ function LearningItem({ item, index, onChange, onDelete }) {
 	if (isSubmitted) {
 		return (
 			<div>
-				{fields.map((field) => (
-					<p key={field.name}>
-						<strong>{field.label}:</strong> {item[field.name]}
-					</p>
-				))}
+				{fields.map(
+					(field) =>
+						item[field.name] && (
+							<p key={field.name}>
+								<strong>{field.label}:</strong>{' '}
+								{item[field.name]}
+							</p>
+						)
+				)}
 
 				<button type="button" onClick={handleEdit}>
 					Edit
