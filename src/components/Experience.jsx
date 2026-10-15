@@ -3,6 +3,7 @@ import { useState } from 'react';
 const fields = [
 	{ label: 'Company Name', name: 'companyName', type: 'text' },
 	{ label: 'Position', name: 'position', type: 'text' },
+	{ label: 'Location', name: 'location', type: 'text' },
 	{ label: 'Description', name: 'description', type: 'text' },
 	{ label: 'Start Date', name: 'startDate', type: 'number' },
 	{ label: 'End Date', name: 'endDate', type: 'number' },
@@ -32,11 +33,15 @@ function ExperienceItem({ item, index, onChange, onDelete }) {
 	if (isSubmitted) {
 		return (
 			<div>
-				{fields.map((field) => (
-					<p key={field.name}>
-						<strong>{field.label}:</strong> {item[field.name]}
-					</p>
-				))}
+				{fields.map(
+					(field) =>
+						item[field.name] && (
+							<p key={field.name}>
+								<strong>{field.label}:</strong>{' '}
+								{item[field.name]}
+							</p>
+						)
+				)}
 
 				<button type="button" onClick={handleEdit}>
 					Edit

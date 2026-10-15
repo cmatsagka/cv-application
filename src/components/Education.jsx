@@ -3,8 +3,10 @@ import { useState } from 'react';
 const fields = [
 	{ label: 'Degree', name: 'degree', type: 'text' },
 	{ label: 'Institution', name: 'institution', type: 'text' },
+	{ label: 'Location', name: 'location', type: 'text' },
 	{ label: 'Start Date', name: 'startDate', type: 'number' },
 	{ label: 'Graduation Date', name: 'graduationDate', type: 'number' },
+	{ label: 'Description', name: 'description', type: 'text' },
 ];
 
 const createEmptyEducation = () => {
@@ -31,11 +33,15 @@ function EducationItem({ item, index, onChange, onDelete }) {
 	if (isSubmitted) {
 		return (
 			<div>
-				{fields.map((field) => (
-					<p key={field.name}>
-						<strong>{field.label}:</strong> {item[field.name]}
-					</p>
-				))}
+				{fields.map(
+					(field) =>
+						item[field.name] && (
+							<p key={field.name}>
+								<strong>{field.label}:</strong>{' '}
+								{item[field.name]}
+							</p>
+						)
+				)}
 
 				<button type="button" onClick={handleEdit}>
 					Edit

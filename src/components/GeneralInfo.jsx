@@ -37,11 +37,16 @@ function Person() {
 	if (isSubmitted) {
 		return (
 			<div>
-				<h1>
-					Full Name: {person.firstName} {person.lastName}
-				</h1>
-				<p>Email: {person.email}</p>
-				<p>Phone: {person.phone}</p>
+				{fields.map(
+					(field) =>
+						person[field.name] && (
+							<p key={field.name}>
+								<strong>{field.label}:</strong>{' '}
+								{person[field.name]}
+							</p>
+						)
+				)}
+
 				<button type="button" onClick={handleEdit}>
 					Edit
 				</button>
