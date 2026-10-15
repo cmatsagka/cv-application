@@ -108,7 +108,7 @@ function Education() {
 					setEducations([...educations, createEmptyEducation()])
 				}
 			>
-				Add Education
+				+ Education
 			</button>
 		</div>
 	);

@@ -109,7 +109,7 @@ function Experience() {
 					setExperience([...experience, createEmptyExperience()])
 				}
 			>
-				Add Experience
+				+ Experience
 			</button>
 		</div>
 	);
