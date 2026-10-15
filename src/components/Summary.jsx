@@ -8,7 +8,7 @@ const fields = [
 	},
 ];
 
-function Summary() {
+function Summary({ isPreview }) {
 	const [summaryInfo, setSummary] = useState({
 		summary: '',
 	});
@@ -32,7 +32,7 @@ function Summary() {
 		setIsSubmitted(false);
 	};
 
-	if (isSubmitted) {
+	if (isSubmitted || isPreview) {
 		return (
 			<div>
 				{fields.map(
@@ -42,9 +42,11 @@ function Summary() {
 						)
 				)}
 
-				<button type="button" onClick={handleEdit}>
-					Edit
-				</button>
+				{!isPreview && (
+					<button type="button" onClick={handleEdit}>
+						Edit
+					</button>
+				)}
 			</div>
 		);
 	}

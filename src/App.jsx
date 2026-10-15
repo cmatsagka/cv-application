@@ -56,13 +56,21 @@ function App() {
 
 			<hr />
 
-			{activeSections.generalInfo && <GeneralInfo />}
-			{activeSections.summary && <Summary />}
-			{activeSections.skills && <Skills />}
-			{activeSections.projects && <Projects />}
-			{activeSections.experience && <Experience />}
-			{activeSections.education && <Education />}
-			{activeSections.continuousLearning && <ContinuousLearning />}
+			{activeSections.generalInfo && (
+				<GeneralInfo isPreview={isPreviewMode} />
+			)}
+			{activeSections.summary && <Summary isPreview={isPreviewMode} />}
+			{activeSections.skills && <Skills isPreview={isPreviewMode} />}
+			{activeSections.projects && <Projects isPreview={isPreviewMode} />}
+			{activeSections.experience && (
+				<Experience isPreview={isPreviewMode} />
+			)}
+			{activeSections.education && (
+				<Education isPreview={isPreviewMode} />
+			)}
+			{activeSections.continuousLearning && (
+				<ContinuousLearning isPreview={isPreviewMode} />
+			)}
 		</div>
 	);
 }

@@ -25,6 +25,7 @@ function SkillCategoryItem({
 	onAdd,
 	onSkillChange,
 	onDeleteSkill,
+	isPreview,
 }) {
 	const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -37,17 +38,24 @@ function SkillCategoryItem({
 		setIsSubmitted(false);
 	};
 
-	if (isSubmitted) {
+	if (isSubmitted || isPreview) {
 		return (
 			<div>
 				<div>
 					<h3>{item.categoryTitle}</h3>
-					<button type="button" onClick={handleEdit}>
-						Edit
-					</button>
-					<button type="button" onClick={() => onDelete(item.id)}>
-						X
-					</button>
+					{!isPreview && (
+						<>
+							<button type="button" onClick={handleEdit}>
+								Edit
+							</button>
+							<button
+								type="button"
+								onClick={() => onDelete(item.id)}
+							>
+								X
+							</button>
+						</>
+					)}
 				</div>
 				<div>
 					{item.skills.map((skill, skillIndex) => (
@@ -58,13 +66,16 @@ function SkillCategoryItem({
 							skillIndex={skillIndex}
 							onSkillChange={onSkillChange}
 							onDeleteSkill={onDeleteSkill}
+							isPreview={isPreview}
 						/>
 					))}
 				</div>
 
-				<button type="button" onClick={() => onAdd(index)}>
-					+ Skill
-				</button>
+				{!isPreview && (
+					<button type="button" onClick={() => onAdd(index)}>
+						+ Skill
+					</button>
+				)}
 			</div>
 		);
 	}
@@ -94,6 +105,7 @@ function SkillItem({
 	skillIndex,
 	onSkillChange,
 	onDeleteSkill,
+	isPreview,
 }) {
 	const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -106,19 +118,25 @@ function SkillItem({
 		setIsSubmitted(false);
 	};
 
-	if (isSubmitted) {
+	if (isSubmitted || isPreview) {
 		return (
 			<div>
 				<span>{skill.skillName}</span>
-				<button type="button" onClick={handleEdit}>
-					Edit
-				</button>
-				<button
-					type="button"
-					onClick={() => onDeleteSkill(categoryIndex, skill.id)}
-				>
-					X
-				</button>
+				{!isPreview && (
+					<>
+						<button type="button" onClick={handleEdit}>
+							Edit
+						</button>
+						<button
+							type="button"
+							onClick={() =>
+								onDeleteSkill(categoryIndex, skill.id)
+							}
+						>
+							X
+						</button>
+					</>
+				)}
 			</div>
 		);
 	}
@@ -143,7 +161,7 @@ function SkillItem({
 	);
 }
 
-function Skills() {
+function Skills({ isPreview }) {
 	const [category, setCategory] = useState([]);
 
 	const handleChange = (index, e) => {
@@ -223,16 +241,19 @@ function Skills() {
 					onAdd={handleAddSkill}
 					onSkillChange={handleSkillChange}
 					onDeleteSkill={handleDeleteSkill}
+					isPreview={isPreview}
 				/>
 			))}
 
-			<button
-				onClick={() =>
-					setCategory([...category, createEmptyCategory()])
-				}
-			>
-				+ Category
-			</button>
+			{!isPreview && (
+				<button
+					onClick={() =>
+						setCategory([...category, createEmptyCategory()])
+					}
+				>
+					+ Category
+				</button>
+			)}
 		</div>
 	);
 }

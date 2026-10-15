@@ -17,7 +17,7 @@ const createEmptyProject = () => {
 	return { ...emptyObj, id: crypto.randomUUID() };
 };
 
-function ProjectItem({ item, index, onChange, onDelete }) {
+function ProjectItem({ item, index, onChange, onDelete, isPreview }) {
 	const [isSubmitted, setIsSubmitted] = useState(false);
 
 	const handleSubmit = (e) => {
@@ -29,7 +29,7 @@ function ProjectItem({ item, index, onChange, onDelete }) {
 		setIsSubmitted(false);
 	};
 
-	if (isSubmitted) {
+	if (isSubmitted || isPreview) {
 		return (
 			<div>
 				{fields.map(
@@ -41,13 +41,16 @@ function ProjectItem({ item, index, onChange, onDelete }) {
 							</p>
 						)
 				)}
-
-				<button type="button" onClick={handleEdit}>
-					Edit
-				</button>
-				<button type="button" onClick={() => onDelete(item.id)}>
-					X
-				</button>
+				{!isPreview && (
+					<>
+						<button type="button" onClick={handleEdit}>
+							Edit
+						</button>
+						<button type="button" onClick={() => onDelete(item.id)}>
+							X
+						</button>
+					</>
+				)}{' '}
 			</div>
 		);
 	}
@@ -73,7 +76,7 @@ function ProjectItem({ item, index, onChange, onDelete }) {
 	);
 }
 
-function Projects() {
+function Projects({ isPreview }) {
 	const [projects, setProjects] = useState([]);
 
 	const handleChange = (index, e) => {
@@ -106,14 +109,19 @@ function Projects() {
 					id={proj.id}
 					onChange={handleChange}
 					onDelete={handleDelete}
+					isPreview={isPreview}
 				/>
 			))}
 
-			<button
-				onClick={() => setProjects([...projects, createEmptyProject()])}
-			>
-				+ Project
-			</button>
+			{!isPreview && (
+				<button
+					onClick={() =>
+						setProjects([...projects, createEmptyProject()])
+					}
+				>
+					+ Project
+				</button>
+			)}
 		</div>
 	);
 }

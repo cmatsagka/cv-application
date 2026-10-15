@@ -16,7 +16,7 @@ const createEmptyLearning = () => {
 	return { ...emptyObj, id: crypto.randomUUID() };
 };
 
-function LearningItem({ item, index, onChange, onDelete }) {
+function LearningItem({ item, index, onChange, onDelete, isPreview }) {
 	const [isSubmitted, setIsSubmitted] = useState(false);
 
 	const handleSubmit = (e) => {
@@ -28,7 +28,7 @@ function LearningItem({ item, index, onChange, onDelete }) {
 		setIsSubmitted(false);
 	};
 
-	if (isSubmitted) {
+	if (isSubmitted || isPreview) {
 		return (
 			<div>
 				{fields.map(
@@ -41,12 +41,17 @@ function LearningItem({ item, index, onChange, onDelete }) {
 						)
 				)}
 
-				<button type="button" onClick={handleEdit}>
-					Edit
-				</button>
-				<button type="button" onClick={() => onDelete(item.id)}>
-					X
-				</button>
+				{!isPreview && (
+					<>
+						<button type="button" onClick={handleEdit}>
+							Edit
+						</button>
+
+						<button type="button" onClick={() => onDelete(item.id)}>
+							X
+						</button>
+					</>
+				)}
 			</div>
 		);
 	}
@@ -72,7 +77,7 @@ function LearningItem({ item, index, onChange, onDelete }) {
 	);
 }
 
-function ContinuousLearning() {
+function ContinuousLearning({ isPreview }) {
 	const [learning, setLearning] = useState([]);
 
 	const handleChange = (index, e) => {
@@ -92,6 +97,7 @@ function ContinuousLearning() {
 			prevLearning.filter((exp) => exp.id !== idToDelete)
 		);
 	};
+
 	return (
 		<div className="continuous-learning">
 			<h2>Continuous Learning</h2>
@@ -104,16 +110,19 @@ function ContinuousLearning() {
 					id={learn.id}
 					onChange={handleChange}
 					onDelete={handleDelete}
+					isPreview={isPreview}
 				/>
 			))}
 
-			<button
-				onClick={() =>
-					setLearning([...learning, createEmptyLearning()])
-				}
-			>
-				+ New
-			</button>
+			{!isPreview && (
+				<button
+					onClick={() =>
+						setLearning([...learning, createEmptyLearning()])
+					}
+				>
+					+ New
+				</button>
+			)}
 		</div>
 	);
 }

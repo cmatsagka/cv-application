@@ -18,7 +18,7 @@ const createEmptyEducation = () => {
 	return { ...emptyObj, id: crypto.randomUUID() };
 };
 
-function EducationItem({ item, index, onChange, onDelete }) {
+function EducationItem({ item, index, onChange, onDelete, isPreview }) {
 	const [isSubmitted, setIsSubmitted] = useState(false);
 
 	const handleSubmit = (e) => {
@@ -30,7 +30,7 @@ function EducationItem({ item, index, onChange, onDelete }) {
 		setIsSubmitted(false);
 	};
 
-	if (isSubmitted) {
+	if (isSubmitted || isPreview) {
 		return (
 			<div>
 				{fields.map(
@@ -42,13 +42,16 @@ function EducationItem({ item, index, onChange, onDelete }) {
 							</p>
 						)
 				)}
-
-				<button type="button" onClick={handleEdit}>
-					Edit
-				</button>
-				<button type="button" onClick={() => onDelete(item.id)}>
-					X
-				</button>
+				{!isPreview && (
+					<>
+						<button type="button" onClick={handleEdit}>
+							Edit
+						</button>
+						<button type="button" onClick={() => onDelete(item.id)}>
+							X
+						</button>
+					</>
+				)}
 			</div>
 		);
 	}
@@ -66,15 +69,19 @@ function EducationItem({ item, index, onChange, onDelete }) {
 					/>
 				</div>
 			))}
-			<button type="submit">Save</button>
-			<button type="button" onClick={() => onDelete(item.id)}>
-				X
-			</button>
+			{!isPreview && (
+				<>
+					<button type="submit">Save</button>
+					<button type="button" onClick={() => onDelete(item.id)}>
+						X
+					</button>
+				</>
+			)}
 		</form>
 	);
 }
 
-function Education() {
+function Education({ isPreview }) {
 	const [educations, setEducations] = useState([]);
 
 	const handleChange = (index, e) => {
@@ -106,16 +113,19 @@ function Education() {
 					id={edu.id}
 					onChange={handleChange}
 					onDelete={handleDelete}
+					isPreview={isPreview}
 				/>
 			))}
 
-			<button
-				onClick={() =>
-					setEducations([...educations, createEmptyEducation()])
-				}
-			>
-				+ Education
-			</button>
+			{!isPreview && (
+				<button
+					onClick={() =>
+						setEducations([...educations, createEmptyEducation()])
+					}
+				>
+					+ Education
+				</button>
+			)}
 		</div>
 	);
 }

@@ -7,7 +7,7 @@ const fields = [
 	{ label: 'Phone', name: 'phone', type: 'text' },
 ];
 
-function Person() {
+function Person({ isPreview }) {
 	const [person, setPerson] = useState({
 		firstName: 'Nemo',
 		lastName: 'Mone',
@@ -34,7 +34,7 @@ function Person() {
 		setIsSubmitted(false);
 	};
 
-	if (isSubmitted) {
+	if (isSubmitted || isPreview) {
 		return (
 			<div>
 				{fields.map(
@@ -47,9 +47,11 @@ function Person() {
 						)
 				)}
 
-				<button type="button" onClick={handleEdit}>
-					Edit
-				</button>
+				{!isPreview && (
+					<button type="button" onClick={handleEdit}>
+						Edit
+					</button>
+				)}
 			</div>
 		);
 	}
@@ -67,16 +69,16 @@ function Person() {
 					/>
 				</div>
 			))}
-			<button type="submit">Save</button>
+			{!isPreview && <button type="submit">Save</button>}
 		</form>
 	);
 }
 
-function GeneralInfo() {
+function GeneralInfo({ isPreview }) {
 	return (
 		<div className="general-info">
 			<h2>General Information</h2>
-			<Person />
+			<Person isPreview={isPreview} />
 		</div>
 	);
 }
