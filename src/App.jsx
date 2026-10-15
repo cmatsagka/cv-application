@@ -9,6 +9,8 @@ import Projects from './components/Projects';
 import Summary from './components/Summary';
 
 function App() {
+	const [isPreviewMode, setIsPreviewMode] = useState(false);
+
 	const [activeSections, setActiveSections] = useState({
 		generalInfo: true,
 		summary: true,
@@ -28,22 +30,29 @@ function App() {
 
 	return (
 		<div className="cv-application">
-			<h1>CV Application</h1>
-
-			<div className="section-controls">
-				<h3>Manage Sections:</h3>
-
-				{Object.keys(activeSections).map((key) => (
-					<label key={key}>
-						<input
-							type="checkbox"
-							checked={activeSections[key]}
-							onChange={() => toggleSection(key)}
-						/>
-						{key.charAt(0).toUpperCase() + key.slice(1)}
-					</label>
-				))}
+			<div className="header-controls">
+				<h1>CV Application</h1>
+				<button onClick={() => setIsPreviewMode(!isPreviewMode)}>
+					{isPreviewMode ? 'Edit CV' : 'Preview CV'}
+				</button>
 			</div>
+
+			{!isPreviewMode && (
+				<div className="section-controls">
+					<h3>Manage Sections:</h3>
+
+					{Object.keys(activeSections).map((key) => (
+						<label key={key}>
+							<input
+								type="checkbox"
+								checked={activeSections[key]}
+								onChange={() => toggleSection(key)}
+							/>
+							{key.charAt(0).toUpperCase() + key.slice(1)}
+						</label>
+					))}
+				</div>
+			)}
 
 			<hr />
 
