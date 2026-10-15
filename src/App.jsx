@@ -35,6 +35,12 @@ function App() {
 				<button onClick={() => setIsPreviewMode(!isPreviewMode)}>
 					{isPreviewMode ? 'Edit CV' : 'Preview CV'}
 				</button>
+
+				{isPreviewMode && (
+					<button onClick={() => window.print()}>
+						Print / Save PDF
+					</button>
+				)}
 			</div>
 
 			{!isPreviewMode && (
