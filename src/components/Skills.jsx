@@ -17,7 +17,14 @@ const createEmptySkill = () => {
 	return { ...emptyObj, id: crypto.randomUUID() };
 };
 
-function SkillCategoryItem({ item, index, onChange, onDelete, onAdd }) {
+function SkillCategoryItem({
+	item,
+	index,
+	onChange,
+	onDelete,
+	onAdd,
+	onSkillChange,
+}) {
 	const [isSubmitted, setIsSubmitted] = useState(false);
 
 	const handleSubmit = (e) => {
@@ -35,7 +42,17 @@ function SkillCategoryItem({ item, index, onChange, onDelete, onAdd }) {
 				<h3>{item.categoryTitle}</h3>
 
 				{item.skills.map((skill, skillIndex) => (
-					<p key={skill.id}>{skill.skillName}</p>
+					<div key={skill.id}>
+						<input
+							type="text"
+							name="skillName"
+							value={skill.skillName}
+							onChange={(e) =>
+								onSkillChange(index, skillIndex, e)
+							}
+							placeholder="e.g. React"
+						/>
+					</div>
 				))}
 
 				<button type="button" onClick={() => onAdd(index)}>
@@ -103,6 +120,24 @@ function Skills() {
 		});
 	};
 
+	const handleSkillChange = (categoryIndex, skillIndex, e) => {
+		const { name, value } = e.target;
+		setCategory((prevCategories) => {
+			const updated = [...prevCategories];
+			const updatedCategory = { ...updated[categoryIndex] };
+			const updatedSkills = [...updatedCategory.skills];
+
+			updatedSkills[skillIndex] = {
+				...updatedSkills[skillIndex],
+				[name]: value,
+			};
+
+			updatedCategory.skills = updatedSkills;
+			updated[categoryIndex] = updatedCategory;
+			return updated;
+		});
+	};
+
 	return (
 		<div className="skills">
 			<h2>Skills</h2>
@@ -115,6 +150,7 @@ function Skills() {
 					onChange={handleChange}
 					onDelete={handleDelete}
 					onAdd={handleAddSkill}
+					onSkillChange={handleSkillChange}
 				/>
 			))}
 
