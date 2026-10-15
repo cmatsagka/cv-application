@@ -3,6 +3,7 @@ import Education from './components/Education';
 import Experience from './components/Experience';
 import Skills from './components/Skills';
 import ContinuousLearning from './components/ContinuousLearning';
+import Projects from './components/Projects';
 
 function App() {
 	return (
@@ -12,6 +13,7 @@ function App() {
 			<Education />
 			<Experience />
 			<Skills />
+			<Projects />
 			<ContinuousLearning />
 		</div>
 	);
