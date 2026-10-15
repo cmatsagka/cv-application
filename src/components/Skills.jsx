@@ -49,23 +49,14 @@ function SkillCategoryItem({
 				</button>
 				<div>
 					{item.skills.map((skill, skillIndex) => (
-						<div key={skill.id}>
-							<input
-								type="text"
-								name="skillName"
-								value={skill.skillName}
-								onChange={(e) =>
-									onSkillChange(index, skillIndex, e)
-								}
-								placeholder="e.g. React"
-							/>
-							<button
-								type="button"
-								onClick={() => onDeleteSkill(index, skill.id)}
-							>
-								X
-							</button>
-						</div>
+						<SkillItem
+							key={skill.id}
+							skill={skill}
+							categoryIndex={index}
+							skillIndex={skillIndex}
+							onSkillChange={onSkillChange}
+							onDeleteSkill={onDeleteSkill}
+						/>
 					))}
 				</div>
 
@@ -90,6 +81,61 @@ function SkillCategoryItem({
 
 			<button type="submit">Save</button>
 			<button type="button" onClick={() => onDelete(item.id)}>
+				X
+			</button>
+		</form>
+	);
+}
+
+function SkillItem({
+	skill,
+	categoryIndex,
+	skillIndex,
+	onSkillChange,
+	onDeleteSkill,
+}) {
+	const [isSubmitted, setIsSubmitted] = useState(false);
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		setIsSubmitted(true);
+	};
+
+	const handleEdit = () => {
+		setIsSubmitted(false);
+	};
+
+	if (isSubmitted) {
+		return (
+			<div>
+				<span>{skill.skillName}</span>
+				<button type="button" onClick={handleEdit}>
+					Edit
+				</button>
+				<button
+					type="button"
+					onClick={() => onDeleteSkill(categoryIndex, skill.id)}
+				>
+					X
+				</button>
+			</div>
+		);
+	}
+
+	return (
+		<form onSubmit={handleSubmit}>
+			<input
+				type="text"
+				name="skillName"
+				value={skill.skillName}
+				onChange={(e) => onSkillChange(categoryIndex, skillIndex, e)}
+				placeholder="e.g. React"
+			/>
+			<button type="submit">Save</button>
+			<button
+				type="button"
+				onClick={() => onDeleteSkill(categoryIndex, skill.id)}
+			>
 				X
 			</button>
 		</form>
