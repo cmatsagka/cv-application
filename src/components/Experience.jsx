@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const fields = [
 	{ label: 'Company Name', name: 'companyName', type: 'text' },
@@ -81,8 +81,14 @@ function ExperienceItem({ item, index, onChange, onDelete, isPreview }) {
 	);
 }
 
-function Experience({ isPreview }) {
+function Experience({ isPreview, initialData }) {
 	const [experience, setExperience] = useState([]);
+
+	useEffect(() => {
+		if (initialData) {
+			setExperience(initialData);
+		}
+	}, [initialData]);
 
 	const handleChange = (index, e) => {
 		const { name, value } = e.target;

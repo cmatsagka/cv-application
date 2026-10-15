@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const createEmptyCategory = () => {
 	const emptyObj = {
@@ -161,8 +161,14 @@ function SkillItem({
 	);
 }
 
-function Skills({ isPreview }) {
+function Skills({ isPreview, initialData }) {
 	const [category, setCategory] = useState([]);
+
+	useEffect(() => {
+		if (initialData && Array.isArray(initialData)) {
+			setCategory(initialData);
+		}
+	}, [initialData]);
 
 	const handleChange = (index, e) => {
 		const { name, value } = e.target;

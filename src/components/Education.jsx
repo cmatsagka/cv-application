@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const fields = [
 	{ label: 'Degree', name: 'degree', type: 'text' },
@@ -81,8 +81,14 @@ function EducationItem({ item, index, onChange, onDelete, isPreview }) {
 	);
 }
 
-function Education({ isPreview }) {
+function Education({ isPreview, initialData }) {
 	const [educations, setEducations] = useState([]);
+
+	useEffect(() => {
+		if (initialData) {
+			setEducations(initialData);
+		}
+	}, [initialData]);
 
 	const handleChange = (index, e) => {
 		const { name, value } = e.target;

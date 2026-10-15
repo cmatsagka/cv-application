@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const fields = [
 	{
@@ -8,12 +8,18 @@ const fields = [
 	},
 ];
 
-function Summary({ isPreview }) {
+function Summary({ isPreview, initialData }) {
 	const [summaryInfo, setSummary] = useState({
 		summary: '',
 	});
 
 	const [isSubmitted, setIsSubmitted] = useState(false);
+
+	useEffect(() => {
+		if (initialData) {
+			setSummary(initialData);
+		}
+	}, [initialData]);
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
@@ -64,7 +70,7 @@ function Summary({ isPreview }) {
 						/>
 					) : (
 						<input
-							type="{field.type"
+							type="{field.type}"
 							name={field.name}
 							value={summaryInfo[field.name]}
 							onChange={handleChange}

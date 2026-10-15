@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const fields = [
 	{ label: 'First Name', name: 'firstName', type: 'text' },
@@ -7,13 +7,19 @@ const fields = [
 	{ label: 'Phone', name: 'phone', type: 'text' },
 ];
 
-function Person({ isPreview }) {
+function Person({ isPreview, initialData }) {
 	const [person, setPerson] = useState({
 		firstName: 'Nemo',
 		lastName: 'Mone',
 		email: '',
 		phone: '',
 	});
+
+	useEffect(() => {
+		if (initialData) {
+			setPerson(initialData);
+		}
+	}, [initialData]);
 
 	const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -74,11 +80,11 @@ function Person({ isPreview }) {
 	);
 }
 
-function GeneralInfo({ isPreview }) {
+function GeneralInfo({ isPreview, initialData }) {
 	return (
 		<div className="general-info">
 			<h2>General Information</h2>
-			<Person isPreview={isPreview} />
+			<Person isPreview={isPreview} initialData={initialData} />
 		</div>
 	);
 }

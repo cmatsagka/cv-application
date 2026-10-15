@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const fields = [
 	{ label: 'Title', name: 'title', type: 'text' },
@@ -77,8 +77,14 @@ function LearningItem({ item, index, onChange, onDelete, isPreview }) {
 	);
 }
 
-function ContinuousLearning({ isPreview }) {
+function ContinuousLearning({ isPreview, initialData }) {
 	const [learning, setLearning] = useState([]);
+
+	useEffect(() => {
+		if (initialData && Array.isArray(initialData)) {
+			setLearning(initialData);
+		}
+	}, [initialData]);
 
 	const handleChange = (index, e) => {
 		const { name, value } = e.target;

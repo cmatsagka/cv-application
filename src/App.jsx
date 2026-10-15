@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { sampleData } from './exampleData';
 
 import GeneralInfo from './components/GeneralInfo';
 import Education from './components/Education';
@@ -10,6 +11,11 @@ import Summary from './components/Summary';
 
 function App() {
 	const [isPreviewMode, setIsPreviewMode] = useState(false);
+	const [cvData, setCvData] = useState({});
+
+	const handleLoadExample = () => {
+		setCvData(sampleData);
+	};
 
 	const [activeSections, setActiveSections] = useState({
 		generalInfo: true,
@@ -35,6 +41,8 @@ function App() {
 				<button onClick={() => setIsPreviewMode(!isPreviewMode)}>
 					{isPreviewMode ? 'Edit CV' : 'Preview CV'}
 				</button>
+
+				<button onClick={handleLoadExample}>Load Example Data</button>
 
 				{isPreviewMode && (
 					<button onClick={() => window.print()}>
@@ -63,19 +71,43 @@ function App() {
 			<hr />
 
 			{activeSections.generalInfo && (
-				<GeneralInfo isPreview={isPreviewMode} />
+				<GeneralInfo
+					isPreview={isPreviewMode}
+					initialData={cvData.generalInfo}
+				/>
 			)}
-			{activeSections.summary && <Summary isPreview={isPreviewMode} />}
-			{activeSections.skills && <Skills isPreview={isPreviewMode} />}
-			{activeSections.projects && <Projects isPreview={isPreviewMode} />}
+			{activeSections.summary && (
+				<Summary
+					isPreview={isPreviewMode}
+					initialData={cvData.summary}
+				/>
+			)}
+			{activeSections.skills && (
+				<Skills isPreview={isPreviewMode} initialData={cvData.skills} />
+			)}
+			{activeSections.projects && (
+				<Projects
+					isPreview={isPreviewMode}
+					initialData={cvData.projects}
+				/>
+			)}
 			{activeSections.experience && (
-				<Experience isPreview={isPreviewMode} />
+				<Experience
+					isPreview={isPreviewMode}
+					initialData={cvData.experience}
+				/>
 			)}
 			{activeSections.education && (
-				<Education isPreview={isPreviewMode} />
+				<Education
+					isPreview={isPreviewMode}
+					initialData={cvData.education}
+				/>
 			)}
 			{activeSections.continuousLearning && (
-				<ContinuousLearning isPreview={isPreviewMode} />
+				<ContinuousLearning
+					isPreview={isPreviewMode}
+					initialData={cvData.continuousLearning}
+				/>
 			)}
 		</div>
 	);
