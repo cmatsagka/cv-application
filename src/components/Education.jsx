@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { load, save } from '../storage';
 
 const fields = [
 	{ label: 'Degree', name: 'degree', type: 'text' },
@@ -82,13 +83,17 @@ function EducationItem({ item, index, onChange, onDelete, isPreview }) {
 }
 
 function Education({ isPreview, initialData }) {
-	const [educations, setEducations] = useState([]);
+	const [educations, setEducations] = useState(load('educationData', []));
 
 	useEffect(() => {
 		if (initialData) {
 			setEducations(initialData);
 		}
 	}, [initialData]);
+
+	useEffect(() => {
+		save('educationData', educations);
+	}, [educations]);
 
 	const handleChange = (index, e) => {
 		const { name, value } = e.target;

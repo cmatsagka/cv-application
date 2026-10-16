@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { load, save } from '../storage';
 
 const fields = [
 	{ label: 'Project Title', name: 'title', type: 'text' },
@@ -77,13 +78,17 @@ function ProjectItem({ item, index, onChange, onDelete, isPreview }) {
 }
 
 function Projects({ isPreview, initialData }) {
-	const [projects, setProjects] = useState([]);
+	const [projects, setProjects] = useState(load('projectsData', []));
 
 	useEffect(() => {
 		if (initialData) {
 			setProjects(initialData);
 		}
 	}, [initialData]);
+
+	useEffect(() => {
+		save('projectsData', projects);
+	}, [projects]);
 
 	const handleChange = (index, e) => {
 		const { name, value } = e.target;

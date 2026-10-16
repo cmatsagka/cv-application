@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { load, save } from './storage';
 import { sampleData } from './exampleData';
 
 import GeneralInfo from './components/GeneralInfo';
@@ -17,15 +18,21 @@ function App() {
 		setCvData(sampleData);
 	};
 
-	const [activeSections, setActiveSections] = useState({
-		generalInfo: true,
-		summary: true,
-		skills: true,
-		projects: true,
-		experience: true,
-		education: true,
-		continuousLearning: true,
-	});
+	const [activeSections, setActiveSections] = useState(
+		load('activeSectionsData', {
+			generalInfo: true,
+			summary: true,
+			skills: true,
+			projects: true,
+			experience: true,
+			education: true,
+			continuousLearning: true,
+		})
+	);
+
+	useEffect(() => {
+		save('activeSectionsData', activeSections);
+	}, [activeSections]);
 
 	const toggleSection = (sectionKey) => {
 		setActiveSections((prev) => ({

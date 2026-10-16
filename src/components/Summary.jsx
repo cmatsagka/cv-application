@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { load, save } from '../storage';
 
 const fields = [
 	{
@@ -9,9 +10,9 @@ const fields = [
 ];
 
 function Summary({ isPreview, initialData }) {
-	const [summaryInfo, setSummary] = useState({
-		summary: '',
-	});
+	const [summaryInfo, setSummary] = useState(
+		load('summaryData', { summary: '' })
+	);
 
 	const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -20,6 +21,10 @@ function Summary({ isPreview, initialData }) {
 			setSummary(initialData);
 		}
 	}, [initialData]);
+
+	useEffect(() => {
+		save('summaryData', summaryInfo);
+	}, [summaryInfo]);
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
@@ -70,7 +75,7 @@ function Summary({ isPreview, initialData }) {
 						/>
 					) : (
 						<input
-							type="{field.type}"
+							type={field.type}
 							name={field.name}
 							value={summaryInfo[field.name]}
 							onChange={handleChange}

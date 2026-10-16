@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { load, save } from '../storage';
 
 const fields = [
 	{ label: 'Company Name', name: 'companyName', type: 'text' },
@@ -82,13 +83,17 @@ function ExperienceItem({ item, index, onChange, onDelete, isPreview }) {
 }
 
 function Experience({ isPreview, initialData }) {
-	const [experience, setExperience] = useState([]);
+	const [experience, setExperience] = useState(load('experienceData', []));
 
 	useEffect(() => {
 		if (initialData) {
 			setExperience(initialData);
 		}
 	}, [initialData]);
+
+	useEffect(() => {
+		save('experienceData', experience);
+	}, [experience]);
 
 	const handleChange = (index, e) => {
 		const { name, value } = e.target;

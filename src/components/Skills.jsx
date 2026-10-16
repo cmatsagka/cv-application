@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { load, save } from '../storage';
 
 const createEmptyCategory = () => {
 	const emptyObj = {
@@ -162,13 +163,17 @@ function SkillItem({
 }
 
 function Skills({ isPreview, initialData }) {
-	const [category, setCategory] = useState([]);
+	const [category, setCategory] = useState(load('categoryData', []));
 
 	useEffect(() => {
 		if (initialData && Array.isArray(initialData)) {
 			setCategory(initialData);
 		}
 	}, [initialData]);
+
+	useEffect(() => {
+		save('categoryData', category);
+	}, [category]);
 
 	const handleChange = (index, e) => {
 		const { name, value } = e.target;
