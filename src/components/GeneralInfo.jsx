@@ -11,8 +11,8 @@ const fields = [
 function Person({ isPreview, initialData }) {
 	const [person, setPerson] = useState(
 		load('personData', {
-			firstName: 'Nemo',
-			lastName: 'Mone',
+			firstName: '',
+			lastName: '',
 			email: '',
 			phone: '',
 		})

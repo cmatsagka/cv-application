@@ -41,6 +41,17 @@ function App() {
 		}));
 	};
 
+	const handleClearAll = () => {
+		const confirmClear = window.confirm(
+			'Are you sure you want to clear your entire CV? This cannot be undone.'
+		);
+
+		if (confirmClear) {
+			localStorage.clear();
+			window.location.reload();
+		}
+	};
+
 	return (
 		<div className="cv-application">
 			<div className="header-controls">
@@ -50,6 +61,7 @@ function App() {
 				</button>
 
 				<button onClick={handleLoadExample}>Load Example Data</button>
+				<button onClick={handleClearAll}>Clear CV</button>
 
 				{isPreviewMode && (
 					<button onClick={() => window.print()}>
