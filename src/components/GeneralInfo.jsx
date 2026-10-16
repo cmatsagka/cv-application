@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { load, save } from '../storage';
 
 const fields = [
 	{ label: 'First Name', name: 'firstName', type: 'text' },
@@ -8,18 +9,24 @@ const fields = [
 ];
 
 function Person({ isPreview, initialData }) {
-	const [person, setPerson] = useState({
-		firstName: 'Nemo',
-		lastName: 'Mone',
-		email: '',
-		phone: '',
-	});
+	const [person, setPerson] = useState(
+		load('personData', {
+			firstName: 'Nemo',
+			lastName: 'Mone',
+			email: '',
+			phone: '',
+		})
+	);
 
 	useEffect(() => {
 		if (initialData) {
 			setPerson(initialData);
 		}
 	}, [initialData]);
+
+	useEffect(() => {
+		save('personData', person);
+	}, [person]);
 
 	const [isSubmitted, setIsSubmitted] = useState(false);
 
