@@ -1,16 +1,50 @@
-# React + Vite
+# React CV Application 📝
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A dynamic, fully responsive CV (Curriculum Vitae) builder built with **React**. This project was created to master state management, component composition, and data flow in React.
 
-Currently, two official plugins are available:
+## ✨ Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Interactive Forms & Preview Mode:** Toggle seamlessly between edit mode and a clean, professional preview mode.
+- **Persistent Storage:** Uses `localStorage` so your data and layout preferences stay saved even if you refresh the page.
+- **Dynamic Sections:** Easily add, edit, or delete multiple entries for Work Experience, Education, Projects, and Skills.
+- **Section Visibility Toggles:** Use the sidebar controls to show or hide specific sections of your CV on the fly.
+- **Example Data Loader:** Instantly populate the CV with sample data to test out layouts.
+- **PDF Export:** Built-in print functionality (`window.print()`) allowing users to easily save their CV as a PDF.
+- **Clear & Reset:** A quick-reset button to wipe storage and start fresh.
 
-## React Compiler
+## 🛠️ Built With
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **React** (Hooks: `useState`, `useEffect`)
+- **JavaScript (ES6+)**
+- **HTML5 & CSS3**
+- **Vite**
 
-## Expanding the ESLint configuration
+## 🚀 Getting Started
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+To run this project locally, follow these steps:
+
+1. **Clone the repository:**
+
+    ```bash
+    git clone [https://github.com/cmatsagka/cv-application](https://github.com/cmatsagka/cv-application)]
+    ```
+
+2. **Navigate into the project directory:**
+
+    ```bash
+    cd cv-application
+    ```
+
+3. **Install dependencies:**
+
+    ```bash
+    npm install
+    ```
+
+4. **Run the development server:**
+
+    ```bash
+    npm run dev
+    ```
+
+5. **Open your browser and visit http://localhost:5173 (or the port provided in your terminal).**
