@@ -76,6 +76,14 @@ form {
 	gap: clamp(0.75rem, 1.5vw, 1.25rem);
 }
 
+.inline-form {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 0.5rem;
+	width: 100%;
+}
+
 label {
 	display: flex;
 	flex-direction: column;

@@ -86,7 +86,7 @@ function SkillCategoryItem({
 	}
 
 	return (
-		<form onSubmit={handleSubmit}>
+		<form onSubmit={handleSubmit} className="inline-form">
 			<div>
 				<label>Category Title:</label>
 				<input
@@ -154,7 +154,7 @@ function SkillItem({
 	}
 
 	return (
-		<form onSubmit={handleSubmit}>
+		<form onSubmit={handleSubmit} className="inline-form">
 			<input
 				type="text"
 				name="skillName"
