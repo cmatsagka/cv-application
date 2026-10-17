@@ -1,9 +1,9 @@
 // src/exampleData.js
 export const sampleData = {
 	generalInfo: {
-		firstName: 'Alex',
-		lastName: 'Morgan',
-		email: 'alex.morgan@example.com',
+		firstName: 'Fake',
+		lastName: 'Name',
+		email: 'fake.name@example.com',
 		phone: '+1 (555) 234-5678',
 		location: 'London, UK',
 	},

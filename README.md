@@ -2,6 +2,10 @@
 
 A dynamic, fully responsive CV (Curriculum Vitae) builder built with **React**. This project was created to master state management, component composition, and data flow in React.
 
+<p align="center">
+  <img src="./assets/cv-application-preview.png" alt="CV Application Preview" width="750" />
+</p>
+
 ## ✨ Features
 
 - **Interactive Forms & Preview Mode:** Toggle seamlessly between edit mode and a clean, professional preview mode.
@@ -26,7 +30,7 @@ To run this project locally, follow these steps:
 1. **Clone the repository:**
 
     ```bash
-    git clone [https://github.com/cmatsagka/cv-application](https://github.com/cmatsagka/cv-application)]
+    git clone [https://github.com/cmatsagka/cv-application](https://github.com/cmatsagka/cv-application)
     ```
 
 2. **Navigate into the project directory:**
