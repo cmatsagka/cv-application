@@ -97,3 +97,27 @@
 		top: auto;
 	}
 }
+
+@media print {
+	.sidebar-panel {
+		display: none !important;
+	}
+
+	.cv-application {
+		display: block;
+		max-width: 100%;
+		margin: 0;
+		padding: 0;
+		box-shadow: none;
+		border: none;
+	}
+
+	.cv-area {
+		border: none;
+		box-shadow: none;
+		padding: 0;
+		margin: 0;
+		width: 100%;
+		min-height: auto;
+	}
+}
