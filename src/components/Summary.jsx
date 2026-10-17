@@ -83,7 +83,9 @@ function Summary({ isPreview, initialData }) {
 					)}
 				</div>
 			))}
-			<button type="submit">Save</button>
+			<div className="form-actions">
+				<button type="submit">Save</button>
+			</div>
 		</form>
 	);
 }

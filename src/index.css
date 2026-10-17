@@ -70,6 +70,55 @@ input[type='checkbox'] {
 	cursor: pointer;
 }
 
+form {
+	display: flex;
+	flex-direction: column;
+	gap: clamp(0.75rem, 1.5vw, 1.25rem);
+}
+
+label {
+	display: flex;
+	flex-direction: column;
+	gap: clamp(0.25rem, 0.5vw, 0.4rem);
+	font-weight: 500;
+	font-size: clamp(0.85rem, 0.5vw + 0.75rem, 0.95rem);
+	color: var(--txt-primary);
+}
+
+input[type='text'],
+input[type='email'],
+input[type='tel'],
+input[type='url'],
+input[type='date'],
+textarea,
+select {
+	font: inherit;
+	padding: clamp(0.45rem, 1vw, 0.65rem) clamp(0.6rem, 1.5vw, 0.9rem);
+	border-radius: 6px;
+	border: 1px solid var(--border-clr);
+	background-color: var(--action-light);
+	color: var(--txt-primary);
+	outline: none;
+	transition:
+		border-color 0.2s ease,
+		box-shadow 0.2s ease;
+	font-size: clamp(0.85rem, 0.5vw + 0.75rem, 1rem);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+	border-color: var(--action-primary);
+	box-shadow: 0 0 0 3px hsla(16, 75%, 45%, 0.15);
+}
+
+textarea {
+	resize: vertical;
+	min-height: clamp(80px, 12vh, 140px);
+	width: 100%;
+	max-width: 100%;
+}
+
 button {
 	background-color: transparent;
 	color: var(--action-primary);

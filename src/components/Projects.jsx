@@ -69,10 +69,12 @@ function ProjectItem({ item, index, onChange, onDelete, isPreview }) {
 					/>
 				</div>
 			))}
-			<button type="submit">Save</button>
-			<button type="button" onClick={() => onDelete(item.id)}>
-				X
-			</button>
+			<div className="form-actions">
+				<button type="submit">Save</button>
+				<button type="button" onClick={() => onDelete(item.id)}>
+					X
+				</button>
+			</div>
 		</form>
 	);
 }

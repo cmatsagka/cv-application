@@ -82,7 +82,11 @@ function Person({ isPreview, initialData }) {
 					/>
 				</div>
 			))}
-			{!isPreview && <button type="submit">Save</button>}
+			{!isPreview && (
+				<div className="form-actions">
+					<button type="submit">Save</button>
+				</div>
+			)}
 		</form>
 	);
 }

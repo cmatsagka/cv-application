@@ -71,12 +71,12 @@ function ExperienceItem({ item, index, onChange, onDelete, isPreview }) {
 				</div>
 			))}
 			{!isPreview && (
-				<>
+				<div className="form-actions">
 					<button type="submit">Save</button>
 					<button type="button" onClick={() => onDelete(item.id)}>
 						X
 					</button>
-				</>
+				</div>
 			)}
 		</form>
 	);
