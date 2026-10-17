@@ -2,9 +2,7 @@
 
 A dynamic, fully responsive CV (Curriculum Vitae) builder built with **React**. This project was created to master state management, component composition, and data flow in React.
 
-<p align="center">
-  <img src="./assets/cv-application-preview.png" alt="CV Application Preview" width="750" />
-</p>
+![CV Application Preview Image](src/assets/cv-application-preview.png)
 
 ## ✨ Features
 
