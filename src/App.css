@@ -87,6 +87,14 @@
 	gap: clamp(1.25rem, 2vw, 2rem);
 }
 
+.cv-content h3 + p,
+.cv-content h3 + div,
+.cv-content div + div,
+.cv-content p + p,
+.cv-content p + span {
+	margin-top: 0.25rem;
+}
+
 @media (max-width: 900px) {
 	.cv-application {
 		grid-template-columns: 1fr;

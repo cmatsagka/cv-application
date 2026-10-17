@@ -169,3 +169,11 @@ button.delete-btn:hover {
 	background-color: var(--error);
 	color: var(--action-light);
 }
+
+h2 {
+	margin-bottom: 0.5rem;
+}
+
+h3 {
+	margin-bottom: 0.25rem;
+}
