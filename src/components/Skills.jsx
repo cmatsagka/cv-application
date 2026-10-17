@@ -62,7 +62,7 @@ function SkillCategoryItem({
 						</>
 					)}
 				</div>
-				<div>
+				<div className="skills-list">
 					{item.skills.map((skill, skillIndex) => (
 						<SkillItem
 							key={skill.id}

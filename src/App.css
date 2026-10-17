@@ -95,6 +95,30 @@
 	margin-top: 0.25rem;
 }
 
+.skills-list > div + div {
+	margin-top: 0 !important;
+}
+
+.skills-list {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 0.5rem;
+	margin-top: 0.5rem;
+}
+
+.skills span {
+	display: inline-flex;
+	align-items: center;
+	background-color: var(--bg-secondary);
+	color: var(--txt-primary);
+	padding: 0.3rem 0.7rem;
+	border-radius: 4px;
+	font-size: 0.9rem;
+	font-weight: 500;
+	line-height: 1.2;
+}
+
 @media (max-width: 900px) {
 	.cv-application {
 		grid-template-columns: 1fr;
@@ -107,6 +131,11 @@
 }
 
 @media print {
+	* {
+		-webkit-print-color-adjust: exact;
+		print-color-adjust: exact;
+	}
+
 	.sidebar-panel {
 		display: none !important;
 	}
