@@ -2,6 +2,8 @@
 
 A dynamic, fully responsive CV (Curriculum Vitae) builder built with **React**. This project was created to master state management, component composition, and data flow in React.
 
+[View Live Demo](https://cv-application-ten-psi.vercel.app/)
+
 ![CV Application Preview Image](src/assets/cv-application-preview.png)
 
 ## ✨ Features
