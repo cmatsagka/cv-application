@@ -6,8 +6,9 @@ import { EditIcon } from '../assets/icons/EditIcon';
 const fields = [
 	{ label: 'First Name', name: 'firstName', type: 'text' },
 	{ label: 'Last Name', name: 'lastName', type: 'text' },
-	{ label: 'Email', name: 'email', type: 'text' },
-	{ label: 'Phone', name: 'phone', type: 'text' },
+	{ label: 'Location', name: 'location', type: 'text' },
+	{ label: 'Phone', name: 'phone', type: 'tel' },
+	{ label: 'Email', name: 'email', type: 'email' },
 ];
 
 function Person({ isPreview, initialData }) {
@@ -17,6 +18,7 @@ function Person({ isPreview, initialData }) {
 			lastName: '',
 			email: '',
 			phone: '',
+			location: '',
 		})
 	);
 
@@ -51,16 +53,22 @@ function Person({ isPreview, initialData }) {
 
 	if (isSubmitted || isPreview) {
 		return (
-			<div>
-				{fields.map(
-					(field) =>
-						person[field.name] && (
-							<p key={field.name}>
-								<strong>{field.label}:</strong>{' '}
-								{person[field.name]}
-							</p>
-						)
-				)}
+			<div className="cv-header">
+				<h1>
+					{person.firstName} {person.lastName}
+				</h1>
+				{fields
+					.filter(
+						(field) =>
+							field.name !== 'firstName' &&
+							field.name !== 'lastName'
+					)
+					.map(
+						(field) =>
+							person[field.name] && (
+								<p key={field.name}>{person[field.name]}</p>
+							)
+					)}
 
 				{!isPreview && (
 					<button type="button" onClick={handleEdit}>
@@ -98,7 +106,6 @@ function Person({ isPreview, initialData }) {
 function GeneralInfo({ isPreview, initialData }) {
 	return (
 		<div className="general-info">
-			<h2>General Information</h2>
 			<Person isPreview={isPreview} initialData={initialData} />
 		</div>
 	);

@@ -48,6 +48,7 @@ function Summary({ isPreview, initialData }) {
 	if (isSubmitted || isPreview) {
 		return (
 			<div>
+				<h2>Professional Summary</h2>
 				{fields.map(
 					(field) =>
 						summaryInfo[field.name] && (

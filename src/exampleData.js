@@ -5,6 +5,7 @@ export const sampleData = {
 		lastName: 'Morgan',
 		email: 'alex.morgan@example.com',
 		phone: '+1 (555) 234-5678',
+		location: 'London, UK',
 	},
 	summary: {
 		summary:
