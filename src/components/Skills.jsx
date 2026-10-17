@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react';
 import { load, save } from '../storage';
+import { SaveIcon } from '../assets/icons/SaveIcon';
+import { EditIcon } from '../assets/icons/EditIcon';
+import { DeleteIcon } from '../assets/icons/DeleteIcon';
 
 const createEmptyCategory = () => {
 	const emptyObj = {
@@ -47,13 +50,14 @@ function SkillCategoryItem({
 					{!isPreview && (
 						<>
 							<button type="button" onClick={handleEdit}>
-								Edit
+								<EditIcon />
 							</button>
 							<button
+								className="delete-btn"
 								type="button"
 								onClick={() => onDelete(item.id)}
 							>
-								X
+								<DeleteIcon />
 							</button>
 						</>
 					)}
@@ -91,9 +95,15 @@ function SkillCategoryItem({
 					value={item.categoryTitle}
 					onChange={(e) => onChange(index, e)}
 				/>
-				<button type="submit">Save</button>
-				<button type="button" onClick={() => onDelete(item.id)}>
-					X
+				<button type="submit">
+					<SaveIcon />
+				</button>
+				<button
+					className="delete-btn"
+					type="button"
+					onClick={() => onDelete(item.id)}
+				>
+					<DeleteIcon />
 				</button>
 			</div>
 		</form>
@@ -126,15 +136,16 @@ function SkillItem({
 				{!isPreview && (
 					<>
 						<button type="button" onClick={handleEdit}>
-							Edit
+							<EditIcon />
 						</button>
 						<button
+							className="delete-btn"
 							type="button"
 							onClick={() =>
 								onDeleteSkill(categoryIndex, skill.id)
 							}
 						>
-							X
+							<DeleteIcon />
 						</button>
 					</>
 				)}
@@ -151,12 +162,15 @@ function SkillItem({
 				onChange={(e) => onSkillChange(categoryIndex, skillIndex, e)}
 				placeholder="e.g. React"
 			/>
-			<button type="submit">Save</button>
+			<button type="submit">
+				<SaveIcon />
+			</button>
 			<button
+				className="delete-btn"
 				type="button"
 				onClick={() => onDeleteSkill(categoryIndex, skill.id)}
 			>
-				X
+				<DeleteIcon />
 			</button>
 		</form>
 	);
@@ -262,7 +276,7 @@ function Skills({ isPreview, initialData }) {
 						setCategory([...category, createEmptyCategory()])
 					}
 				>
-					+ Category
+					+ Skill
 				</button>
 			)}
 		</div>

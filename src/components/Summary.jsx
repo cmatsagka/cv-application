@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { load, save } from '../storage';
+import { SaveIcon } from '../assets/icons/SaveIcon';
+import { EditIcon } from '../assets/icons/EditIcon';
 
 const fields = [
 	{
@@ -55,7 +57,7 @@ function Summary({ isPreview, initialData }) {
 
 				{!isPreview && (
 					<button type="button" onClick={handleEdit}>
-						Edit
+						<EditIcon />
 					</button>
 				)}
 			</div>
@@ -84,7 +86,9 @@ function Summary({ isPreview, initialData }) {
 				</div>
 			))}
 			<div className="form-actions">
-				<button type="submit">Save</button>
+				<button type="submit">
+					<SaveIcon />
+				</button>
 			</div>
 		</form>
 	);

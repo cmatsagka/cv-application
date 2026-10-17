@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react';
 import { load, save } from '../storage';
+import { SaveIcon } from '../assets/icons/SaveIcon';
+import { EditIcon } from '../assets/icons/EditIcon';
+import { DeleteIcon } from '../assets/icons/DeleteIcon';
 
 const fields = [
 	{ label: 'Degree', name: 'degree', type: 'text' },
@@ -46,10 +49,14 @@ function EducationItem({ item, index, onChange, onDelete, isPreview }) {
 				{!isPreview && (
 					<>
 						<button type="button" onClick={handleEdit}>
-							Edit
+							<EditIcon />
 						</button>
-						<button type="button" onClick={() => onDelete(item.id)}>
-							X
+						<button
+							className="delete-btn"
+							type="button"
+							onClick={() => onDelete(item.id)}
+						>
+							<DeleteIcon />
 						</button>
 					</>
 				)}
@@ -72,9 +79,15 @@ function EducationItem({ item, index, onChange, onDelete, isPreview }) {
 			))}
 			{!isPreview && (
 				<div className="form-actions">
-					<button type="submit">Save</button>
-					<button type="button" onClick={() => onDelete(item.id)}>
-						X
+					<button type="submit">
+						<SaveIcon />
+					</button>
+					<button
+						className="delete-btn"
+						type="button"
+						onClick={() => onDelete(item.id)}
+					>
+						<DeleteIcon />
 					</button>
 				</div>
 			)}
