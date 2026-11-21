@@ -1,10 +1,21 @@
 import useCvData from './hooks/useCvData';
 import GeneralInfo from './components/GeneralInfo';
 import Summary from './components/Summary';
+import Experience from './components/Experience';
+import Education from './components/Education';
+import Projects from './components/Projects';
+import ContinuousLearning from './components/ContinuousLearning';
 
 function App() {
-	const { cvData, updateSectionField, handleLoadExample, handleClearAll } =
-		useCvData();
+	const {
+		cvData,
+		updateSectionField,
+		addListItem,
+		updateListItem,
+		deleteListItem,
+		handleLoadExample,
+		handleClearAll,
+	} = useCvData();
 
 	return (
 		<div className="cv-application">
@@ -32,9 +43,31 @@ function App() {
 						data={cvData.summary}
 						onUpdateField={updateSectionField}
 					/>
+					<Experience
+						items={cvData.experience}
+						onAddItem={addListItem}
+						onUpdateItem={updateListItem}
+						onDeleteItem={deleteListItem}
+					/>
+					<Education
+						items={cvData.education}
+						onAddItem={addListItem}
+						onUpdateItem={updateListItem}
+						onDeleteItem={deleteListItem}
+					/>
+					<Projects
+						items={cvData.projects}
+						onAddItem={addListItem}
+						onUpdateItem={updateListItem}
+						onDeleteItem={deleteListItem}
+					/>
+					<ContinuousLearning
+						items={cvData.continuousLearning}
+						onAddItem={addListItem}
+						onUpdateItem={updateListItem}
+						onDeleteItem={deleteListItem}
+					/>
 				</div>
-
-				<pre>{JSON.stringify(cvData, null, 2)}</pre>
 			</main>
 		</div>
 	);

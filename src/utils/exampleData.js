@@ -36,21 +36,21 @@ export const sampleData = {
 			title: 'E-Commerce Dashboard',
 			link: 'https://github.com/example/dashboard',
 			technologies: 'React, Tailwind CSS, Chart.js',
+			date: '2025',
 			description:
 				'Built a fully responsive admin dashboard featuring real-time data visualization and product inventory management.',
-			date: '2025',
 		},
 	],
 	experience: [
 		{
 			id: 'e-1',
-			companyName: 'TechCorp Solutions',
-			position: 'Junior Frontend Developer',
+			company: 'TechCorp Solutions',
+			role: 'Junior Frontend Developer',
 			location: 'San Francisco, CA',
-			description:
-				'Collaborated with UI/UX designers to implement accessible landing pages and optimized component reusability.',
 			startDate: '2024',
 			endDate: '2026',
+			description:
+				'Collaborated with UI/UX designers to implement accessible landing pages and optimized component reusability.',
 		},
 	],
 	education: [

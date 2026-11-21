@@ -1,156 +1,57 @@
-import { useEffect, useState } from 'react';
-import { load, save } from '../storage';
-import { SaveIcon } from '../assets/icons/SaveIcon';
-import { EditIcon } from '../assets/icons/EditIcon';
-import { DeleteIcon } from '../assets/icons/DeleteIcon';
+import ListSection from './ListSection';
 
-const fields = [
+const EDUCATION_FIELDS = [
 	{ label: 'Degree', name: 'degree', type: 'text' },
 	{ label: 'Institution', name: 'institution', type: 'text' },
 	{ label: 'Location', name: 'location', type: 'text' },
-	{ label: 'Start Date', name: 'startDate', type: 'number' },
-	{ label: 'Graduation Date', name: 'graduationDate', type: 'number' },
-	{ label: 'Description', name: 'description', type: 'text' },
+	{ label: 'Start Date', name: 'startDate', type: 'text' },
+	{ label: 'Graduation Date', name: 'graduationDate', type: 'text' },
+	{
+		label: 'Description',
+		name: 'description',
+		type: 'textarea',
+		placeholder: 'Some info about this...',
+		rows: 3,
+	},
 ];
 
-const createEmptyEducation = () => {
-	const emptyObj = fields.reduce((acc, field) => {
-		acc[field.name] = '';
-		return acc;
-	}, {});
-
-	return { ...emptyObj, id: crypto.randomUUID() };
-};
-
-function EducationItem({ item, index, onChange, onDelete, isPreview }) {
-	const [isSubmitted, setIsSubmitted] = useState(false);
-
-	const handleSubmit = (e) => {
-		e.preventDefault();
-		setIsSubmitted(true);
-	};
-
-	const handleEdit = () => {
-		setIsSubmitted(false);
-	};
-
-	if (isSubmitted || isPreview) {
-		return (
-			<div>
-				{fields.map(
-					(field) =>
-						item[field.name] && (
-							<p key={field.name}>
-								<strong>{field.label}:</strong>{' '}
-								{item[field.name]}
-							</p>
-						)
-				)}
-				{!isPreview && (
-					<>
-						<button type="button" onClick={handleEdit}>
-							<EditIcon />
-						</button>
-						<button
-							className="delete-btn"
-							type="button"
-							onClick={() => onDelete(item.id)}
-						>
-							<DeleteIcon />
-						</button>
-					</>
-				)}
-			</div>
-		);
-	}
-
+function Education({
+	items,
+	onAddItem,
+	onUpdateItem,
+	onDeleteItem,
+	isPreview = false,
+}) {
 	return (
-		<form onSubmit={handleSubmit}>
-			{fields.map((field) => (
-				<div key={field.name}>
-					<label>{field.label}: </label>
-					<input
-						type={field.type}
-						name={field.name}
-						value={item[field.name]}
-						onChange={(e) => onChange(index, e)}
-					/>
-				</div>
-			))}
-			{!isPreview && (
-				<div className="form-actions">
-					<button type="submit">
-						<SaveIcon />
-					</button>
-					<button
-						className="delete-btn"
-						type="button"
-						onClick={() => onDelete(item.id)}
-					>
-						<DeleteIcon />
-					</button>
+		<ListSection
+			sectionKey="education"
+			title="Education"
+			addLabel="Add Education"
+			fields={EDUCATION_FIELDS}
+			items={items}
+			onAddItem={onAddItem}
+			onUpdateItem={onUpdateItem}
+			onDeleteItem={onDeleteItem}
+			isPreview={isPreview}
+			renderItem={(item) => (
+				<div>
+					<h3>
+						{item.degree || 'Degree'}{' '}
+						{item.institution ? ` @ ${item.institution}` : ''}
+					</h3>
+					{item.location && <p>{item.location}</p>}
+					{(item.startDate || item.endDate) && (
+						<p className="date-range">
+							{[
+								item.startDate,
+								item.endDate.filter(Boolean).join(' - '),
+							]}
+						</p>
+					)}
+					{item.description && <p>{item.description}</p>}
 				</div>
 			)}
-		</form>
-	);
-}
-
-function Education({ isPreview, initialData }) {
-	const [educations, setEducations] = useState(load('educationData', []));
-
-	useEffect(() => {
-		if (initialData) {
-			setEducations(initialData);
-		}
-	}, [initialData]);
-
-	useEffect(() => {
-		save('educationData', educations);
-	}, [educations]);
-
-	const handleChange = (index, e) => {
-		const { name, value } = e.target;
-		setEducations((prevEducations) => {
-			const updated = [...prevEducations];
-			updated[index] = {
-				...updated[index],
-				[name]: value,
-			};
-			return updated;
-		});
-	};
-
-	const handleDelete = (idToDelete) => {
-		setEducations((prevEducations) =>
-			prevEducations.filter((edu) => edu.id !== idToDelete)
-		);
-	};
-
-	return (
-		<div className="education">
-			<h2>Education</h2>
-			{educations.map((edu, index) => (
-				<EducationItem
-					key={edu.id}
-					item={edu}
-					index={index}
-					id={edu.id}
-					onChange={handleChange}
-					onDelete={handleDelete}
-					isPreview={isPreview}
-				/>
-			))}
-
-			{!isPreview && (
-				<button
-					onClick={() =>
-						setEducations([...educations, createEmptyEducation()])
-					}
-				>
-					+ Education
-				</button>
-			)}
-		</div>
+		/>
 	);
 }
 
