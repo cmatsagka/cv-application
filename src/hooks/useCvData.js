@@ -5,7 +5,7 @@ import { save, load } from '../utils/storage';
 
 const STORAGE_KEY = 'cv_data';
 
-export default function useCvData() {
+export function useCvData() {
 	const [cvData, setCvData] = useState(() => load(STORAGE_KEY, emptyCvData));
 
 	useEffect(() => {
