@@ -5,7 +5,7 @@ import { save, load } from '../utils/storage';
 
 const STORAGE_KEY = 'cv_data';
 
-export function useCvData() {
+export default function useCvData() {
 	const [cvData, setCvData] = useState(() => load(STORAGE_KEY, emptyCvData));
 
 	useEffect(() => {
@@ -32,6 +32,8 @@ export function useCvData() {
 			...prev,
 			[sectionKey]: [...(prev[sectionKey] || []), newItem],
 		}));
+
+		return newItem.id;
 	};
 
 	const updateListItem = (sectionKey, itemId, fieldName, value) => {

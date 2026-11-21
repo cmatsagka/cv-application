@@ -24,18 +24,13 @@ function App() {
 
 			<main className="cv-area">
 				<div className="cv-content">
-					<label htmlFor="test-first-name">First Name (test)</label>
-					<input
-						id="test-first-name"
-						type="text"
-						value={cvData.generalInfo?.firstName || ''}
-						onChange={(e) =>
-							updateSectionField(
-								'generalInfo',
-								'firstName',
-								e.target.value
-							)
-						}
+					<GeneralInfo
+						data={cvData.generalInfo}
+						onUpdateField={updateSectionField}
+					/>
+					<Summary
+						data={cvData.summary}
+						onUpdateField={updateSectionField}
 					/>
 				</div>
 
