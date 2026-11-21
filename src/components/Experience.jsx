@@ -42,10 +42,7 @@ function Experience({
 					{item.location && <p>{item.location}</p>}
 					{(item.startDate || item.endDate) && (
 						<p className="date-range">
-							{[
-								item.startDate,
-								item.endDate.filter(Boolean).join(' - '),
-							]}
+							{item.startDate} - {item.endDate || 'Present'},
 						</p>
 					)}
 					{item.description && <p>{item.description}</p>}

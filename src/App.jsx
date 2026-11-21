@@ -7,6 +7,7 @@ import Projects from './components/Projects';
 import ContinuousLearning from './components/ContinuousLearning';
 import Skills from './components/Skills';
 import { useState } from 'react';
+import './App.css';
 
 function App() {
 	const [isPreview, setIsPreview] = useState(false);

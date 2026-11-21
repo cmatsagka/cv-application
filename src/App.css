@@ -87,14 +87,6 @@
 	gap: clamp(1.25rem, 2vw, 2rem);
 }
 
-.cv-content h3 + p,
-.cv-content h3 + div,
-.cv-content div + div,
-.cv-content p + p,
-.cv-content p + span {
-	margin-top: 0.25rem;
-}
-
 .skills-list > div + div {
 	margin-top: 0 !important;
 }
@@ -141,7 +133,8 @@
 		print-color-adjust: exact;
 	}
 
-	.sidebar-panel {
+	.sidebar-panel,
+	aside {
 		display: none !important;
 	}
 
