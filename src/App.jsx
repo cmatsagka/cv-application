@@ -1,3 +1,4 @@
+import './App.css';
 import useCvData from './hooks/useCvData';
 import GeneralInfo from './components/GeneralInfo';
 import Summary from './components/Summary';
@@ -7,11 +8,8 @@ import Projects from './components/Projects';
 import ContinuousLearning from './components/ContinuousLearning';
 import Skills from './components/Skills';
 import { useState } from 'react';
-import './App.css';
 
 function App() {
-	const [isPreview, setIsPreview] = useState(false);
-
 	const {
 		cvData,
 		updateSectionField,
@@ -29,55 +27,44 @@ function App() {
 	} = useCvData();
 
 	const handlePrint = () => {
-		setIsPreview(true);
-		setTimeout(() => {
-			window.print();
-		}, 50);
+		window.print();
 	};
 
 	return (
-		<div className={`cv-application ${isPreview ? 'preview-mode' : ''}`}>
-			<aside className="sidebar-panel">
-				<div className="header-controls">
-					<h1>CV Application</h1>
-					<div className="action-buttons">
-						<button
-							type="button"
-							onClick={() => setIsPreview((prev) => !prev)}
-						>
-							{isPreview ? 'Back to Edit' : 'Preview CV'}
-						</button>
-						<button type="button" onClick={handlePrint}>
-							Print / Save PDF
-						</button>
+		<div className="container">
+			<aside className="editor-pane">
+				<header className="editor-topbar">
+					<h1>CV Builder</h1>
+					<div className="editor-actions">
 						<button type="button" onClick={handleLoadExample}>
 							Load Example Data
 						</button>
 						<button type="button" onClick={handleClearAll}>
 							Clear CV
 						</button>
+						<button type="button" onClick={handlePrint}>
+							Print / Save PDF
+						</button>
 					</div>
-				</div>
-			</aside>
+				</header>
 
-			<main className="cv-area">
-				<div className="cv-content">
+				<div className="editor-sections">
 					<GeneralInfo
 						data={cvData.generalInfo}
 						onUpdateField={updateSectionField}
-						isPreview={isPreview}
+						isPreview={false}
 					/>
 					<Summary
 						data={cvData.summary}
 						onUpdateField={updateSectionField}
-						isPreview={isPreview}
+						isPreview={false}
 					/>
 					<Experience
 						items={cvData.experience}
 						onAddItem={addListItem}
 						onUpdateItem={updateListItem}
 						onDeleteItem={deleteListItem}
-						isPreview={isPreview}
+						isPreview={false}
 					/>
 					<Skills
 						categories={cvData.skills}
@@ -87,29 +74,94 @@ function App() {
 						onAddSkill={addSkillItem}
 						onUpdateSkill={updateSkillItem}
 						onDeleteSkill={deleteSkillItem}
-						isPreview={isPreview}
+						isPreview={false}
 					/>
 					<Education
 						items={cvData.education}
 						onAddItem={addListItem}
 						onUpdateItem={updateListItem}
 						onDeleteItem={deleteListItem}
-						isPreview={isPreview}
+						isPreview={false}
 					/>
 					<Projects
 						items={cvData.projects}
 						onAddItem={addListItem}
 						onUpdateItem={updateListItem}
 						onDeleteItem={deleteListItem}
-						isPreview={isPreview}
+						isPreview={false}
 					/>
 					<ContinuousLearning
 						items={cvData.continuousLearning}
 						onAddItem={addListItem}
 						onUpdateItem={updateListItem}
 						onDeleteItem={deleteListItem}
-						isPreview={isPreview}
+						isPreview={false}
 					/>
+				</div>
+			</aside>
+
+			<main className="preview-pane">
+				<div className="cv-sheet">
+					<GeneralInfo
+						data={cvData.generalInfo}
+						onUpdateField={updateSectionField}
+						isPreview={true}
+					/>
+					{cvData.summary?.summary?.trim() && (
+						<Summary
+							data={cvData.summary}
+							onUpdateField={updateSectionField}
+							isPreview={true}
+						/>
+					)}
+					{cvData.experience.length > 0 && (
+						<Experience
+							items={cvData.experience}
+							onAddItem={addListItem}
+							onUpdateItem={updateListItem}
+							onDeleteItem={deleteListItem}
+							isPreview={true}
+						/>
+					)}
+					{cvData.skills.length > 0 && (
+						<Skills
+							categories={cvData.skills}
+							onAddCategory={addSkillCategory}
+							onUpdateCategory={updateSkillCategory}
+							onDeleteCategory={deleteSkillCategory}
+							onAddSkill={addSkillItem}
+							onUpdateSkill={updateSkillItem}
+							onDeleteSkill={deleteSkillItem}
+							isPreview={true}
+						/>
+					)}
+					{cvData.education.length > 0 && (
+						<Education
+							items={cvData.education}
+							onAddItem={addListItem}
+							onUpdateItem={updateListItem}
+							onDeleteItem={deleteListItem}
+							isPreview={true}
+						/>
+					)}
+					{cvData.projects.length > 0 && (
+						<Projects
+							items={cvData.projects}
+							onAddItem={addListItem}
+							onUpdateItem={updateListItem}
+							onDeleteItem={deleteListItem}
+							isPreview={true}
+						/>
+					)}
+					{cvData.continuousLearning.length > 0 && (
+						<ContinuousLearning
+							items={cvData.continuousLearning}
+							onAddItem={addListItem}
+							onUpdateItem={updateListItem}
+							onDeleteItem={deleteListItem}
+							isPreview={true}
+						/>
+					)}
 				</div>
 			</main>
 		</div>
