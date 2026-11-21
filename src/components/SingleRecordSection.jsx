@@ -25,17 +25,19 @@ function SingleRecordSection({
 
 	return (
 		<section className="section-card">
-			<div className="section-header">
-				{title && <h2>{title}</h2>}
-				{!isPreview && (
-					<button
-						type="button"
-						onClick={() => setIsEditing((prev) => !prev)}
-					>
-						{isEditing ? 'Done' : 'Edit'}
-					</button>
-				)}
-			</div>
+			{(title || !isPreview) && (
+				<div className="section-header">
+					{title && <h2>{title}</h2>}
+					{!isPreview && (
+						<button
+							type="button"
+							onClick={() => setIsEditing((prev) => !prev)}
+						>
+							{isEditing ? 'Done' : 'Edit'}
+						</button>
+					)}
+				</div>
+			)}
 
 			{showForm ? (
 				<form onSubmit={handleSubmit} className="section-form">

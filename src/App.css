@@ -131,6 +131,23 @@
 	gap: 0.85rem;
 }
 
+.cv-sheet .general-info-view {
+	padding-bottom: 1rem;
+	border-bottom: 2px solid var(--border-clr);
+}
+
+.cv-sheet .general-info-view h1 {
+	font-size: clamp(1.75rem, 2.5vw, 2.35rem);
+	font-weight: 700;
+	line-height: 1.15;
+	color: var(--action-primary);
+}
+
+.cv-sheet .general-info-view p {
+	margin-top: 0.45rem;
+	font-size: 0.92rem;
+}
+
 @media (max-width: 900px) {
 	.container {
 		grid-template-columns: 1fr;

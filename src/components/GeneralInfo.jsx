@@ -13,26 +13,28 @@ function GeneralInfo({ data, onUpdateField, isPreview = false }) {
 		.filter(Boolean)
 		.join(' ');
 
+	const contactLine = [data?.email, data?.phone, data?.location]
+		.filter(Boolean)
+		.join(' • ');
+
 	return (
 		<SingleRecordSection
 			sectionKey="generalInfo"
-			title="General Information"
+			title={isPreview ? null : 'General Information'}
 			fields={GENERALINFO_FIELDS}
 			data={data}
 			onUpdateField={onUpdateField}
 			isPreview={isPreview}
 			renderView={(generalInfoData) => (
 				<div className="general-info-view">
-					<h3>{fullName || 'Your Name'}</h3>
-					<p>
-						{[
-							generalInfoData?.email,
-							generalInfoData?.phone,
-							generalInfoData?.location,
-						]
-							.filter(Boolean)
-							.join(' • ') || 'Add contact details'}
-					</p>
+					{isPreview ? (
+						<h1>{fullName || 'Your Name'}</h1>
+					) : (
+						<h3>{fullName || 'Your Name'}</h3>
+					)}
+					{(contactLine || !isPreview) && (
+						<p>{contactLine || 'Add contact details'}</p>
+					)}
 				</div>
 			)}
 		/>
