@@ -1,0 +1,193 @@
+.editor-pane .section-card {
+	background-color: var(--action-light);
+	border: 1px solid var(--border-clr);
+	border-radius: 8px;
+	padding: 1rem 1.15rem;
+	box-shadow: var(--shadow-md);
+}
+
+.editor-pane .section-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.75rem;
+	margin-bottom: 0.75rem;
+}
+
+.editor-pane .section-header h2 {
+	margin-bottom: 0;
+	font-size: 1.05rem;
+	font-weight: 600;
+}
+
+.editor-pane .empty-state {
+	margin-bottom: 0;
+	color: var(--txt-secondary);
+	font-style: italic;
+}
+
+.editor-pane .section-list {
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+}
+
+.editor-pane .list-item-card,
+.editor-pane .item-form {
+	padding: 0.85rem;
+	border-radius: 6px;
+	border: 1px solid var(--border-clr);
+	background-color: var(--bg-primary);
+}
+
+.editor-pane .list-item-card {
+	display: flex;
+	flex-direction: column;
+	gap: 0.65rem;
+}
+
+.editor-pane .list-item-content h3 {
+	font-size: 0.98rem;
+	font-weight: 600;
+}
+
+.editor-pane .list-item-content p {
+	font-size: 0.88rem;
+	color: var(--txt-secondary);
+	margin-top: 0.2rem;
+}
+
+.editor-pane .item-actions,
+.editor-pane .form-actions {
+	display: flex;
+	gap: 0.4rem;
+}
+
+.editor-pane .item-actions button,
+.editor-pane .form-actions button {
+	padding: 0.35rem 0.65rem;
+	font-size: 0.85rem;
+	background-color: var(--action-light);
+	border: 1px solid var(--border-clr);
+}
+
+.editor-pane .item-actions button:hover,
+.editor-pane .form-actions button:hover {
+	border-color: transparent;
+}
+
+.editor-pane .skill-input-row {
+	display: flex;
+	align-items: center;
+	gap: 0.45rem;
+	margin-bottom: 0.45rem;
+}
+
+.editor-pane .skill-input-row input {
+	flex: 1;
+	min-width: 0;
+}
+
+.editor-pane .skill-input-row button {
+	padding: 0.45rem 0.65rem;
+	font-size: 0.85rem;
+	background-color: var(--action-light);
+	border: 1px solid var(--border-clr);
+	flex-shrink: 0;
+}
+
+.editor-pane .skill-input-row button:hover {
+	border-color: transparent;
+}
+
+.editor-pane .form-group > button {
+	margin-top: 0.35rem;
+	padding: 0.4rem 0.7rem;
+	font-size: 0.85rem;
+	align-self: flex-start;
+}
+
+.editor-pane .form-group {
+	display: flex;
+	flex-direction: column;
+	gap: 0.35rem;
+	margin-bottom: 0.75rem;
+}
+
+.editor-pane .form-group:last-of-type {
+	margin-bottom: 0;
+}
+
+.editor-pane .form-label {
+	font-size: 0.88rem;
+	font-weight: 500;
+}
+
+.cv-sheet .general-info-view {
+	padding-bottom: 1rem;
+	border-bottom: 2px solid var(--border-clr);
+}
+
+.cv-sheet .general-info-view h1 {
+	font-size: clamp(1.75rem, 2.5vw, 2.35rem);
+	font-weight: 700;
+	line-height: 1.15;
+	color: var(--action-primary);
+}
+
+.cv-sheet .general-info-view p {
+	margin-top: 0.45rem;
+	font-size: 0.92rem;
+}
+
+.cv-sheet .section-header h2 {
+	font-size: 0.95rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+	color: var(--action-primary);
+	padding-bottom: 0.35rem;
+	border-bottom: 1px solid var(--border-clr);
+	margin-bottom: 0.75rem;
+}
+
+.cv-sheet .summary-text {
+	line-height: 1.65;
+	font-size: 0.96rem;
+	white-space: pre-line;
+}
+
+.cv-sheet .section-list {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+.cv-sheet .list-item-card {
+	break-inside: avoid;
+}
+
+.cv-sheet .list-item-content h3 {
+	font-size: 1.02rem;
+	font-weight: 600;
+	margin-bottom: 0.15rem;
+}
+
+.cv-sheet .list-item-content .date-range {
+	font-size: 0.88rem;
+	font-weight: 500;
+	margin-bottom: 0.35rem;
+}
+
+.cv-sheet .list-item-content p:not(.date-range) {
+	font-size: 0.93rem;
+	line-height: 1.55;
+	margin-top: 0.25rem;
+	white-space: pre-line;
+}
+
+.cv-sheet .section-card .list-item-content {
+	display: flex;
+	flex-direction: column;
+	gap: 0.15rem;
+}

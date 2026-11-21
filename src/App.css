@@ -55,41 +55,6 @@
 	gap: 1rem;
 }
 
-.editor-pane .section-card {
-	background-color: var(--action-light);
-	border: 1px solid var(--border-clr);
-	border-radius: 8px;
-	padding: 1rem 1.15rem;
-	box-shadow: var(--shadow-sm);
-}
-
-.editor-pane .section-header {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	gap: 0.75rem;
-	margin-bottom: 0.75rem;
-}
-
-.editor-pane .section-header h2 {
-	margin-bottom: 0;
-	font-size: 1.05rem;
-}
-
-.editor-pane .section-list {
-	display: flex;
-	flex-direction: column;
-	gap: 0.75rem;
-}
-
-.editor-pane .list-item-card,
-.editor-pane .item-form {
-	padding: 0.85rem;
-	border-radius: 6px;
-	border: 1px solid var(--border-clr);
-	background-color: var(--bg-primary);
-}
-
 .preview-pane {
 	padding: clamp(1.25rem, 3vw, 2.5rem);
 	display: flex;
@@ -113,39 +78,6 @@
 
 .cv-sheet .section-card:has(.empty-state) {
 	display: none;
-}
-
-.cv-sheet .section-header h2 {
-	font-size: 1.05rem;
-	text-transform: uppercase;
-	letter-spacing: 0.05em;
-	color: var(--action-primary);
-	padding-bottom: 0.35rem;
-	border-bottom: 1px solid var(--border-clr);
-	margin-bottom: 0.75rem;
-}
-
-.cv-sheet .section-list {
-	display: flex;
-	flex-direction: column;
-	gap: 0.85rem;
-}
-
-.cv-sheet .general-info-view {
-	padding-bottom: 1rem;
-	border-bottom: 2px solid var(--border-clr);
-}
-
-.cv-sheet .general-info-view h1 {
-	font-size: clamp(1.75rem, 2.5vw, 2.35rem);
-	font-weight: 700;
-	line-height: 1.15;
-	color: var(--action-primary);
-}
-
-.cv-sheet .general-info-view p {
-	margin-top: 0.45rem;
-	font-size: 0.92rem;
 }
 
 @media (max-width: 900px) {

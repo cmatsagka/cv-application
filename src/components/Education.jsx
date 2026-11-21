@@ -36,13 +36,14 @@ function Education({
 			renderItem={(item) => (
 				<div>
 					<h3>
-						{item.degree || 'Degree'}{' '}
-						{item.institution ? ` @ ${item.institution}` : ''}
+						{item.degree || 'Degree'}
+						{item.institution ? `, ${item.institution}` : ''}
 					</h3>
 					{item.location && <p>{item.location}</p>}
-					{(item.startDate || item.endDate) && (
+					{(item.startDate || item.graduationDate) && (
 						<p className="date-range">
-							{item.startDate} - {item.endDate || 'Present'},
+							{item.startDate} -{' '}
+							{item.graduationDate || 'Present'},
 						</p>
 					)}
 					{item.description && <p>{item.description}</p>}

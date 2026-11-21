@@ -1,4 +1,5 @@
 import './App.css';
+import './styles/ListSection.css';
 import useCvData from './hooks/useCvData';
 import GeneralInfo from './components/GeneralInfo';
 import Summary from './components/Summary';
