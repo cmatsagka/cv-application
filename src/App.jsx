@@ -5,6 +5,7 @@ import Experience from './components/Experience';
 import Education from './components/Education';
 import Projects from './components/Projects';
 import ContinuousLearning from './components/ContinuousLearning';
+import Skills from './components/Skills';
 
 function App() {
 	const {
@@ -13,6 +14,12 @@ function App() {
 		addListItem,
 		updateListItem,
 		deleteListItem,
+		addSkillCategory,
+		updateSkillCategory,
+		deleteSkillCategory,
+		addSkillItem,
+		updateSkillItem,
+		deleteSkillItem,
 		handleLoadExample,
 		handleClearAll,
 	} = useCvData();
@@ -48,6 +55,15 @@ function App() {
 						onAddItem={addListItem}
 						onUpdateItem={updateListItem}
 						onDeleteItem={deleteListItem}
+					/>
+					<Skills
+						categories={cvData.skills}
+						onAddCategory={addSkillCategory}
+						onUpdateCategory={updateSkillCategory}
+						onDeleteCategory={deleteSkillCategory}
+						onAddSkill={addSkillItem}
+						onUpdateSkill={updateSkillItem}
+						onDeleteSkill={deleteSkillItem}
 					/>
 					<Education
 						items={cvData.education}

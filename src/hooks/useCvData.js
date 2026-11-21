@@ -54,6 +54,96 @@ export default function useCvData() {
 		}));
 	};
 
+	const addSkillCategory = (categoryTitle = '') => {
+		const newCategory = {
+			id: crypto.randomUUID(),
+			categoryTitle,
+			skills: [],
+		};
+
+		setCvData((prev) => ({
+			...prev,
+			skills: [...(prev.skills || []), newCategory],
+		}));
+
+		return newCategory.id;
+	};
+
+	const updateSkillCategory = (categoryId, categoryTitle) => {
+		setCvData((prev) => ({
+			...prev,
+			skills: (prev.skills || []).map((category) =>
+				category.id === categoryId
+					? { ...category, categoryTitle }
+					: category
+			),
+		}));
+	};
+
+	const deleteSkillCategory = (categoryId) => {
+		setCvData((prev) => ({
+			...prev,
+			skills: (prev.skills || []).filter(
+				(category) => category.id !== categoryId
+			),
+		}));
+	};
+
+	const addSkillItem = (categoryId, skillName = '') => {
+		const newSkill = {
+			id: crypto.randomUUID(),
+			skillName,
+		};
+
+		setCvData((prev) => ({
+			...prev,
+			skills: (prev.skills || []).map((category) =>
+				category.id === categoryId
+					? {
+							...category,
+							skills: [...(category.skills || []), newSkill],
+						}
+					: category
+			),
+		}));
+
+		return newSkill.id;
+	};
+
+	const updateSkillItem = (categoryId, skillId, skillName) => {
+		setCvData((prev) => ({
+			...prev,
+			skills: (prev.skills || []).map((category) =>
+				category.id === categoryId
+					? {
+							...category,
+							skills: (category.skills || []).map((skill) =>
+								skill.id === skillId
+									? { ...skill, skillName }
+									: skill
+							),
+						}
+					: category
+			),
+		}));
+	};
+
+	const deleteSkillItem = (categoryId, skillId) => {
+		setCvData((prev) => ({
+			...prev,
+			skills: (prev.skills || []).map((category) =>
+				category.id === categoryId
+					? {
+							...category,
+							skills: (category.skills || []).filter(
+								(skill) => skill.id !== skillId
+							),
+						}
+					: category
+			),
+		}));
+	};
+
 	const handleLoadExample = () => {
 		setCvData(sampleData);
 	};
@@ -75,6 +165,12 @@ export default function useCvData() {
 		addListItem,
 		updateListItem,
 		deleteListItem,
+		addSkillCategory,
+		updateSkillCategory,
+		deleteSkillCategory,
+		addSkillItem,
+		updateSkillItem,
+		deleteSkillItem,
 		handleLoadExample,
 		handleClearAll,
 	};

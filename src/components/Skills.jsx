@@ -1,285 +1,201 @@
-import { useEffect, useState } from 'react';
-import { load, save } from '../storage';
-import { SaveIcon } from '../assets/icons/SaveIcon';
-import { EditIcon } from '../assets/icons/EditIcon';
-import { DeleteIcon } from '../assets/icons/DeleteIcon';
+import { useState } from 'react';
 
-const createEmptyCategory = () => {
-	const emptyObj = {
-		categoryTitle: '',
-		skills: [],
-	};
-
-	return { ...emptyObj, id: crypto.randomUUID() };
-};
-
-const createEmptySkill = () => {
-	const emptyObj = {
-		skillName: '',
-	};
-
-	return { ...emptyObj, id: crypto.randomUUID() };
-};
-
-function SkillCategoryItem({
-	item,
-	index,
-	onChange,
-	onDelete,
-	onAdd,
-	onSkillChange,
+function Skills({
+	categories = [],
+	onAddCategory,
+	onUpdateCategory,
+	onDeleteCategory,
+	onAddSkill,
+	onUpdateSkill,
 	onDeleteSkill,
 	isPreview,
 }) {
-	const [isSubmitted, setIsSubmitted] = useState(false);
+	const [editingCategoryId, setEditingCategoryId] = useState(null);
 
-	const handleSubmit = (e) => {
-		e.preventDefault();
-		setIsSubmitted(true);
+	const handleAddCategory = () => {
+		const newCategoryId = onAddCategory('');
+		if (newCategoryId) {
+			setEditingCategoryId(newCategoryId);
+		}
 	};
 
-	const handleEdit = () => {
-		setIsSubmitted(false);
+	const handleDeleteCategory = (categoryId) => {
+		if (editingCategoryId === categoryId) {
+			setEditingCategoryId(null);
+		}
+		onDeleteCategory(categoryId);
 	};
 
-	if (isSubmitted || isPreview) {
-		return (
-			<div>
-				<div>
-					<h3>{item.categoryTitle}</h3>
-					{!isPreview && (
-						<>
-							<button type="button" onClick={handleEdit}>
-								<EditIcon />
-							</button>
-							<button
-								className="delete-btn"
-								type="button"
-								onClick={() => onDelete(item.id)}
-							>
-								<DeleteIcon />
-							</button>
-						</>
-					)}
-				</div>
-				<div className="skills-list">
-					{item.skills.map((skill, skillIndex) => (
-						<SkillItem
-							key={skill.id}
-							skill={skill}
-							categoryIndex={index}
-							skillIndex={skillIndex}
-							onSkillChange={onSkillChange}
-							onDeleteSkill={onDeleteSkill}
-							isPreview={isPreview}
-						/>
-					))}
-				</div>
-
+	return (
+		<section className="section-card">
+			<div className="section-header">
+				<h2>Skills</h2>
 				{!isPreview && (
-					<button type="button" onClick={() => onAdd(index)}>
-						+ Skill
+					<button type="button" onClick={handleAddCategory}>
+						+ Add Category
 					</button>
 				)}
 			</div>
-		);
-	}
 
-	return (
-		<form onSubmit={handleSubmit} className="inline-form">
-			<div>
-				<label>Category Title:</label>
-				<input
-					type="text"
-					name="categoryTitle"
-					value={item.categoryTitle}
-					onChange={(e) => onChange(index, e)}
-				/>
-				<button type="submit">
-					<SaveIcon />
-				</button>
-				<button
-					className="delete-btn"
-					type="button"
-					onClick={() => onDelete(item.id)}
-				>
-					<DeleteIcon />
-				</button>
-			</div>
-		</form>
-	);
-}
+			{categories.length === 0 ? (
+				<p className="empty-state">No skill categories added yet.</p>
+			) : (
+				<div className="section-list">
+					{categories.map((category) => {
+						const categorySkills = category.skills || [];
+						const isEditing =
+							!isPreview && editingCategoryId === category.id;
 
-function SkillItem({
-	skill,
-	categoryIndex,
-	skillIndex,
-	onSkillChange,
-	onDeleteSkill,
-	isPreview,
-}) {
-	const [isSubmitted, setIsSubmitted] = useState(false);
+						if (isEditing) {
+							return (
+								<div key={category.id} className="item-form">
+									<div className="form-group">
+										<label
+											htmlFor={`category-title-${category.id}`}
+										>
+											Category Name
+										</label>
+										<input
+											id={`category-title-${category.id}`}
+											type="text"
+											value={category.categoryTitle ?? ''}
+											placeholder="e.g., Frontend Development"
+											onChange={(e) =>
+												onUpdateCategory(
+													category.id,
+													e.target.value
+												)
+											}
+										/>
+									</div>
 
-	const handleSubmit = (e) => {
-		e.preventDefault();
-		setIsSubmitted(true);
-	};
+									<div className="form-group">
+										<span className="form-label">
+											Skills
+										</span>
+										{categorySkills.length === 0 ? (
+											<p className="empty-state">
+												No skills in the category yet.
+											</p>
+										) : (
+											categorySkills.map((skill) => (
+												<div
+													key={skill.id}
+													className="skill-input-row"
+												>
+													<input
+														type="text"
+														aria-label="Skill name"
+														value={
+															skill.skillName ??
+															''
+														}
+														placeholder="e.g., React"
+														onChange={(e) =>
+															onUpdateSkill(
+																category.id,
+																skill.id,
+																e.target.value
+															)
+														}
+													/>
+													<button
+														type="button"
+														onClick={() =>
+															onDeleteSkill(
+																category.id,
+																skill.id
+															)
+														}
+													>
+														Remove
+													</button>
+												</div>
+											))
+										)}
 
-	const handleEdit = () => {
-		setIsSubmitted(false);
-	};
+										<button
+											type="button"
+											onClick={() =>
+												onAddSkill(category.id, '')
+											}
+										>
+											+ Add Skill
+										</button>
+									</div>
 
-	if (isSubmitted || isPreview) {
-		return (
-			<div>
-				<span>{skill.skillName}</span>
-				{!isPreview && (
-					<>
-						<button type="button" onClick={handleEdit}>
-							<EditIcon />
-						</button>
-						<button
-							className="delete-btn"
-							type="button"
-							onClick={() =>
-								onDeleteSkill(categoryIndex, skill.id)
-							}
-						>
-							<DeleteIcon />
-						</button>
-					</>
-				)}
-			</div>
-		);
-	}
+									<div className="form-actions">
+										<button
+											type="button"
+											onClick={() =>
+												setEditingCategoryId(null)
+											}
+										>
+											Done
+										</button>
+										<button
+											type="button"
+											onClick={() =>
+												handleDeleteCategory(
+													category.id
+												)
+											}
+										>
+											Delete Category
+										</button>
+									</div>
+								</div>
+							);
+						}
 
-	return (
-		<form onSubmit={handleSubmit} className="inline-form">
-			<input
-				type="text"
-				name="skillName"
-				value={skill.skillName}
-				onChange={(e) => onSkillChange(categoryIndex, skillIndex, e)}
-				placeholder="e.g. React"
-			/>
-			<button type="submit">
-				<SaveIcon />
-			</button>
-			<button
-				className="delete-btn"
-				type="button"
-				onClick={() => onDeleteSkill(categoryIndex, skill.id)}
-			>
-				<DeleteIcon />
-			</button>
-		</form>
-	);
-}
+						const skillNames = categorySkills
+							.map((skill) => skill.skillName?.trim())
+							.filter(Boolean);
 
-function Skills({ isPreview, initialData }) {
-	const [category, setCategory] = useState(load('categoryData', []));
+						return (
+							<div key={category.id} className="list-item-card">
+								<div className="list-item-content">
+									<h3>
+										{category.categoryTitle ||
+											'Untitled Category'}
+									</h3>
+									<p>
+										{skillNames.length > 0
+											? skillNames.join(' • ')
+											: 'No skills listed'}
+									</p>
+								</div>
 
-	useEffect(() => {
-		if (initialData && Array.isArray(initialData)) {
-			setCategory(initialData);
-		}
-	}, [initialData]);
-
-	useEffect(() => {
-		save('categoryData', category);
-	}, [category]);
-
-	const handleChange = (index, e) => {
-		const { name, value } = e.target;
-		setCategory((prevCategories) => {
-			const updated = [...prevCategories];
-			updated[index] = {
-				...updated[index],
-				[name]: value,
-			};
-			return updated;
-		});
-	};
-
-	const handleDelete = (idToDelete) => {
-		setCategory((prevCategories) =>
-			prevCategories.filter((cat) => cat.id !== idToDelete)
-		);
-	};
-
-	const handleAddSkill = (categoryIndex) => {
-		setCategory((prevCategories) => {
-			const updated = [...prevCategories];
-			updated[categoryIndex] = {
-				...updated[categoryIndex],
-				skills: [...updated[categoryIndex].skills, createEmptySkill()],
-			};
-			return updated;
-		});
-	};
-
-	const handleDeleteSkill = (categoryIndex, skillId) => {
-		setCategory((prevCategories) => {
-			const updated = [...prevCategories];
-			const updatedCategory = {
-				...updated[categoryIndex],
-			};
-
-			updatedCategory.skills = updatedCategory.skills.filter(
-				(skill) => skill.id !== skillId
-			);
-
-			updated[categoryIndex] = updatedCategory;
-			return updated;
-		});
-	};
-
-	const handleSkillChange = (categoryIndex, skillIndex, e) => {
-		const { name, value } = e.target;
-		setCategory((prevCategories) => {
-			const updated = [...prevCategories];
-			const updatedCategory = { ...updated[categoryIndex] };
-			const updatedSkills = [...updatedCategory.skills];
-
-			updatedSkills[skillIndex] = {
-				...updatedSkills[skillIndex],
-				[name]: value,
-			};
-
-			updatedCategory.skills = updatedSkills;
-			updated[categoryIndex] = updatedCategory;
-			return updated;
-		});
-	};
-
-	return (
-		<div className="skills">
-			<h2>Skills</h2>
-
-			{category.map((item, index) => (
-				<SkillCategoryItem
-					key={item.id}
-					item={item}
-					index={index}
-					onChange={handleChange}
-					onDelete={handleDelete}
-					onAdd={handleAddSkill}
-					onSkillChange={handleSkillChange}
-					onDeleteSkill={handleDeleteSkill}
-					isPreview={isPreview}
-				/>
-			))}
-
-			{!isPreview && (
-				<button
-					onClick={() =>
-						setCategory([...category, createEmptyCategory()])
-					}
-				>
-					+ Skill
-				</button>
+								{!isPreview && (
+									<div className="item-actions">
+										<button
+											type="button"
+											onClick={() =>
+												setEditingCategoryId(
+													category.id
+												)
+											}
+										>
+											Edit
+										</button>
+										<button
+											type="button"
+											onClick={() =>
+												handleDeleteCategory(
+													category.id
+												)
+											}
+										>
+											Delete
+										</button>
+									</div>
+								)}
+							</div>
+						);
+					})}
+				</div>
 			)}
-		</div>
+		</section>
 	);
 }
 
