@@ -15,6 +15,7 @@ A dynamic, fully responsive CV (Curriculum Vitae) builder built with **React**. 
 - **Example Data Loader:** Instantly populate the CV with sample data to test out layouts.
 - **PDF Export:** Built-in print functionality (`window.print()`) allowing users to easily save their CV as a PDF.
 - **Clear & Reset:** A quick-reset button to wipe storage and start fresh.
+- **Accessible Controls & Responsive Layout:** Contextual `aria-label` attributes on icon buttons and a responsive layout that stacks cleanly on smaller screens.
 
 ## 🛠️ Built With
 
