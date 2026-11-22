@@ -31,6 +31,7 @@
 .editor-topbar h1 {
 	font-size: clamp(1.2rem, 1.2vw + 0.7rem, 1.5rem);
 	font-weight: 700;
+	color: var(--action-primary);
 }
 
 .editor-actions {

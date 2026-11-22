@@ -125,7 +125,6 @@
 
 .cv-sheet .general-info-view {
 	padding-bottom: 1rem;
-	border-bottom: 2px solid var(--border-clr);
 }
 
 .cv-sheet .general-info-view h1 {
@@ -147,7 +146,6 @@
 	letter-spacing: 0.06em;
 	color: var(--action-primary);
 	padding-bottom: 0.35rem;
-	border-bottom: 1px solid var(--border-clr);
 	margin-bottom: 0.75rem;
 }
 
