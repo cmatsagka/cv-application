@@ -104,8 +104,19 @@
 		print-color-adjust: exact;
 	}
 
-	.preview-pane {
-		padding: 0;
+	html,
+	body,
+	#root,
+	.container,
+	.preview-pane,
+	.cv-sheet {
+		background: hsl(0, 0%, 100%) !important;
+		background-color: hsl(0, 0%, 100%) !important;
+	}
+
+	body {
+		display: block;
+		min-height: auto;
 	}
 
 	.editor-pane {
@@ -114,7 +125,11 @@
 
 	.container {
 		display: block;
-		background: transparent;
+	}
+
+	.preview-pane {
+		display: block;
+		padding: 0;
 	}
 
 	.cv-sheet {
@@ -124,5 +139,16 @@
 		border-radius: 0;
 		box-shadow: none;
 		padding: 0;
+	}
+
+	.cv-sheet .section-header {
+		break-after: avoid;
+		page-break-after: avoid;
+	}
+
+	.cv-sheet .list-item-card,
+	.cv-sheet .general-info-view {
+		break-inside: avoid;
+		page-break-inside: avoid;
 	}
 }
