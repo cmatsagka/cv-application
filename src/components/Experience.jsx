@@ -41,21 +41,18 @@ function Experience({
 				]
 					.filter(Boolean)
 					.join(' - ');
-				<div>
-					<h3>
-						{item.role || 'Role'}{' '}
-						{item.company ? ` @ ${item.company}` : ''}
-					</h3>
-					{item.location && <p>{item.location}</p>}
-					{(item.startDate || item.endDate) && (
-						<p className="date-range">
-							{dateRange && (
-								<p className="date-range">{dateRange}</p>
-							)}
-						</p>
-					)}
-					{item.description && <p>{item.description}</p>}
-				</div>;
+
+				return (
+					<div>
+						<h3>
+							{item.role || 'Role'}{' '}
+							{item.company ? ` @ ${item.company}` : ''}
+						</h3>
+						{item.location && <p>{item.location}</p>}
+						{dateRange && <p className="date-range">{dateRange}</p>}
+						{item.description && <p>{item.description}</p>}
+					</div>
+				);
 			}}
 		/>
 	);

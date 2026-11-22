@@ -34,7 +34,13 @@ function Projects({
 			isPreview={isPreview}
 			renderItem={(item) => (
 				<div>
-					<h3>{item.title || 'Project Title'} </h3>
+					<h3>
+						{item.title || 'Project Title'}
+						{', '}
+						{item.date && (
+							<span className="date-range">{item.date}</span>
+						)}
+					</h3>
 					{item.link && <p>{item.link}</p>}
 
 					{item.technologies && (
@@ -47,7 +53,6 @@ function Projects({
 						</p>
 					)}
 
-					{item.date && <p className="date-range">{item.date}</p>}
 					{item.description && <p>{item.description}</p>}
 				</div>
 			)}
