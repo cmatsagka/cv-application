@@ -8,7 +8,9 @@ import Education from './components/Education';
 import Projects from './components/Projects';
 import ContinuousLearning from './components/ContinuousLearning';
 import Skills from './components/Skills';
-import { useState } from 'react';
+import { DownloadIcon } from './assets/icons/DownloadIcon';
+import { ExampleIcon } from './assets/icons/ExampleIcon';
+import { ClearAllIcon } from './assets/icons/ClearAllIcon';
 
 function App() {
 	const {
@@ -38,13 +40,13 @@ function App() {
 					<h1>CV Builder</h1>
 					<div className="editor-actions">
 						<button type="button" onClick={handleLoadExample}>
-							Load Example Data
+							<ExampleIcon />
 						</button>
 						<button type="button" onClick={handleClearAll}>
-							Clear CV
+							<ClearAllIcon />
 						</button>
 						<button type="button" onClick={handlePrint}>
-							Print / Save PDF
+							<DownloadIcon />
 						</button>
 					</div>
 				</header>

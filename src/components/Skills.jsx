@@ -1,4 +1,8 @@
 import { useState } from 'react';
+import { EditIcon } from '../assets/icons/EditIcon';
+import { DeleteIcon } from '../assets/icons/DeleteIcon';
+import { SaveIcon } from '../assets/icons/SaveIcon';
+import { AddIcon } from '../assets/icons/AddIcon';
 
 function Skills({
 	categories = [],
@@ -32,7 +36,7 @@ function Skills({
 				<h2>Skills</h2>
 				{!isPreview && (
 					<button type="button" onClick={handleAddCategory}>
-						+ Add Category
+						<AddIcon />
 					</button>
 				)}
 			</div>
@@ -108,7 +112,7 @@ function Skills({
 															)
 														}
 													>
-														Remove
+														<DeleteIcon />
 													</button>
 												</div>
 											))
@@ -120,7 +124,7 @@ function Skills({
 												onAddSkill(category.id, '')
 											}
 										>
-											+ Add Skill
+											<AddIcon />
 										</button>
 									</div>
 
@@ -131,7 +135,7 @@ function Skills({
 												setEditingCategoryId(null)
 											}
 										>
-											Done
+											<SaveIcon />
 										</button>
 										<button
 											type="button"
@@ -141,7 +145,7 @@ function Skills({
 												)
 											}
 										>
-											Delete Category
+											<DeleteIcon />
 										</button>
 									</div>
 								</div>
@@ -176,7 +180,7 @@ function Skills({
 												)
 											}
 										>
-											Edit
+											<EditIcon />
 										</button>
 										<button
 											type="button"
@@ -186,7 +190,7 @@ function Skills({
 												)
 											}
 										>
-											Delete
+											<DeleteIcon />
 										</button>
 									</div>
 								)}

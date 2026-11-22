@@ -129,6 +129,9 @@ textarea {
 }
 
 button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
 	background-color: transparent;
 	color: var(--action-primary);
 	padding: 0.6rem 0.8rem;

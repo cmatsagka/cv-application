@@ -1,4 +1,8 @@
 import { useState } from 'react';
+import { EditIcon } from '../assets/icons/EditIcon';
+import { DeleteIcon } from '../assets/icons/DeleteIcon';
+import { SaveIcon } from '../assets/icons/SaveIcon';
+import { AddIcon } from '../assets/icons/AddIcon';
 
 function ListSection({
 	sectionKey,
@@ -39,7 +43,7 @@ function ListSection({
 				{title && <h2>{title}</h2>}
 				{!isPreview && (
 					<button type="button" onClick={handleAdd}>
-						+ {addLabel}
+						<AddIcon />
 					</button>
 				)}
 			</div>
@@ -120,14 +124,16 @@ function ListSection({
 									})}
 
 									<div className="form-actions">
-										<button type="submit">Done</button>
+										<button type="submit">
+											<SaveIcon />
+										</button>
 										<button
 											type="button"
 											onClick={() =>
 												handleDelete(item.id)
 											}
 										>
-											Delete
+											<DeleteIcon />
 										</button>
 									</div>
 								</form>
@@ -157,7 +163,7 @@ function ListSection({
 												setEditingId(item.id)
 											}
 										>
-											Edit
+											<EditIcon />
 										</button>
 										<button
 											type="button"
@@ -165,7 +171,7 @@ function ListSection({
 												handleDelete(item.id)
 											}
 										>
-											Delete
+											<DeleteIcon />
 										</button>
 									</div>
 								)}

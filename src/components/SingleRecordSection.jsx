@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { EditIcon } from '../assets/icons/EditIcon';
+import { SaveIcon } from '../assets/icons/SaveIcon';
 
 function SingleRecordSection({
 	sectionKey,
@@ -33,7 +35,7 @@ function SingleRecordSection({
 							type="button"
 							onClick={() => setIsEditing((prev) => !prev)}
 						>
-							{isEditing ? 'Done' : 'Edit'}
+							{isEditing ? <SaveIcon /> : <EditIcon />}
 						</button>
 					)}
 				</div>
@@ -70,8 +72,6 @@ function SingleRecordSection({
 							</div>
 						);
 					})}
-
-					<button type="submit">Save</button>
 				</form>
 			) : renderView ? (
 				renderView(data)
