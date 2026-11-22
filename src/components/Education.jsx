@@ -26,29 +26,33 @@ function Education({
 		<ListSection
 			sectionKey="education"
 			title="Education"
-			addLabel="Add Education"
 			fields={EDUCATION_FIELDS}
 			items={items}
 			onAddItem={onAddItem}
 			onUpdateItem={onUpdateItem}
 			onDeleteItem={onDeleteItem}
 			isPreview={isPreview}
-			renderItem={(item) => (
-				<div>
-					<h3>
-						{item.degree || 'Degree'}
-						{item.institution ? `, ${item.institution}` : ''}
-					</h3>
-					{item.location && <p>{item.location}</p>}
-					{(item.startDate || item.graduationDate) && (
-						<p className="date-range">
-							{item.startDate} -{' '}
-							{item.graduationDate || 'Present'},
-						</p>
-					)}
-					{item.description && <p>{item.description}</p>}
-				</div>
-			)}
+			renderItem={(item) => {
+				const dateRange = [
+					item.startDate?.trim(),
+					item.graduationDate?.trim() ||
+						(item.startDate?.trim() ? 'Present' : ''),
+				]
+					.filter(Boolean)
+					.join(' - ');
+
+				return (
+					<div>
+						<h3>
+							{item.degree || 'Degree'}
+							{item.institution ? `, ${item.institution}` : ''}
+						</h3>
+						{item.location && <p>{item.location}</p>}
+						{dateRange && <p className="date-range">{dateRange}</p>}
+						{item.description && <p>{item.description}</p>}
+					</div>
+				);
+			}}
 		/>
 	);
 }

@@ -11,6 +11,8 @@ export function ClearAllIcon({ size = 16 }) {
 			stroke-linecap="round"
 			stroke-linejoin="round"
 			class="lucide lucide-trash preview-icon"
+			aria-hidden="true"
+			focusable="false"
 		>
 			<path d="M10 11v6" />
 			<path d="M14 11v6" />

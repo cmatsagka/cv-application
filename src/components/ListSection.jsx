@@ -7,7 +7,6 @@ import { AddIcon } from '../assets/icons/AddIcon';
 function ListSection({
 	sectionKey,
 	title,
-	addLabel = 'Add Item',
 	fields = [],
 	items = [],
 	onAddItem,
@@ -42,7 +41,11 @@ function ListSection({
 			<div className="section-header">
 				{title && <h2>{title}</h2>}
 				{!isPreview && (
-					<button type="button" onClick={handleAdd}>
+					<button
+						type="button"
+						aria-label={`Add ${title || 'item'}`}
+						onClick={handleAdd}
+					>
 						<AddIcon />
 					</button>
 				)}
@@ -124,11 +127,15 @@ function ListSection({
 									})}
 
 									<div className="form-actions">
-										<button type="submit">
+										<button
+											type="submit"
+											aria-label={`Save ${title || 'item'}`}
+										>
 											<SaveIcon />
 										</button>
 										<button
 											type="button"
+											aria-label={`Delete ${title || 'item'}`}
 											onClick={() =>
 												handleDelete(item.id)
 											}
@@ -159,6 +166,7 @@ function ListSection({
 									<div className="item-actions">
 										<button
 											type="button"
+											aria-label={`Edit ${title || 'item'}`}
 											onClick={() =>
 												setEditingId(item.id)
 											}
@@ -167,6 +175,7 @@ function ListSection({
 										</button>
 										<button
 											type="button"
+											aria-label={`Delete ${title || 'item'}`}
 											onClick={() =>
 												handleDelete(item.id)
 											}

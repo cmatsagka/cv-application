@@ -11,6 +11,8 @@ export function AddIcon({ size = 16 }) {
 			stroke-linecap="round"
 			stroke-linejoin="round"
 			class="lucide lucide-plus preview-icon"
+			aria-hidden="true"
+			focusable="false"
 		>
 			<path d="M5 12h14" />
 			<path d="M12 5v14" />

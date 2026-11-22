@@ -10,7 +10,9 @@ export function ExampleIcon({ size = 16 }) {
 			stroke-width="2"
 			stroke-linecap="round"
 			stroke-linejoin="round"
-			class="lucide lucide-pencil-sparkles preview-icon"
+			aria-hidden="true"
+			focusable="false"
+			class="lucide lucide-trash preview-icon"
 		>
 			<path d="M10 3H8" />
 			<path d="m15.007 5.008 3.987 3.986" />

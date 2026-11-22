@@ -39,13 +39,25 @@ function App() {
 				<header className="editor-topbar">
 					<h1>CV Builder</h1>
 					<div className="editor-actions">
-						<button type="button" onClick={handleLoadExample}>
+						<button
+							type="button"
+							aria-label="Load example CV data"
+							onClick={handleLoadExample}
+						>
 							<ExampleIcon />
 						</button>
-						<button type="button" onClick={handleClearAll}>
+						<button
+							type="button"
+							aria-label="Clear all CV data"
+							onClick={handleClearAll}
+						>
 							<ClearAllIcon />
 						</button>
-						<button type="button" onClick={handlePrint}>
+						<button
+							type="button"
+							aria-label="Download or print CV as PDF"
+							onClick={handlePrint}
+						>
 							<DownloadIcon />
 						</button>
 					</div>

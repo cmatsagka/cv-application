@@ -35,7 +35,11 @@ function Skills({
 			<div className="section-header">
 				<h2>Skills</h2>
 				{!isPreview && (
-					<button type="button" onClick={handleAddCategory}>
+					<button
+						type="button"
+						aria-label="Add Skill Category"
+						onClick={handleAddCategory}
+					>
 						<AddIcon />
 					</button>
 				)}
@@ -47,6 +51,8 @@ function Skills({
 				<div className="section-list">
 					{categories.map((category) => {
 						const categorySkills = category.skills || [];
+						const categoryLabel =
+							category.categoryTitle?.trim() || 'skill category';
 						const isEditing =
 							!isPreview && editingCategoryId === category.id;
 
@@ -105,6 +111,7 @@ function Skills({
 													/>
 													<button
 														type="button"
+														aria-label={`Remove ${skill.skillName?.trim() || 'skill'}`}
 														onClick={() =>
 															onDeleteSkill(
 																category.id,
@@ -120,6 +127,7 @@ function Skills({
 
 										<button
 											type="button"
+											aria-label={`Add skill to ${categoryLabel}`}
 											onClick={() =>
 												onAddSkill(category.id, '')
 											}
@@ -131,6 +139,7 @@ function Skills({
 									<div className="form-actions">
 										<button
 											type="button"
+											aria-label={`Save ${categoryLabel}`}
 											onClick={() =>
 												setEditingCategoryId(null)
 											}
@@ -139,6 +148,7 @@ function Skills({
 										</button>
 										<button
 											type="button"
+											aria-label={`Delete ${categoryLabel}`}
 											onClick={() =>
 												handleDeleteCategory(
 													category.id
@@ -174,6 +184,7 @@ function Skills({
 									<div className="item-actions">
 										<button
 											type="button"
+											aria-label={`Edit ${categoryLabel}`}
 											onClick={() =>
 												setEditingCategoryId(
 													category.id
@@ -184,6 +195,7 @@ function Skills({
 										</button>
 										<button
 											type="button"
+											aria-label={`Delete ${categoryLabel}`}
 											onClick={() =>
 												handleDeleteCategory(
 													category.id

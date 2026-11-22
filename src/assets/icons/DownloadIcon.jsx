@@ -10,7 +10,9 @@ export function DownloadIcon({ size = 16 }) {
 			stroke-width="2"
 			stroke-linecap="round"
 			stroke-linejoin="round"
-			class="lucide lucide-download preview-icon"
+			aria-hidden="true"
+			focusable="false"
+			class="lucide lucide-trash preview-icon"
 		>
 			<path d="M12 15V3" />
 			<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />

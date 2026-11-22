@@ -34,8 +34,10 @@ function ContinuousLearning({
 			isPreview={isPreview}
 			renderItem={(item) => (
 				<div>
-					<h3>{item.title || 'Title'} </h3>
-					{item.platform ? ` @ ${item.platform}` : ''}
+					<h3>
+						{item.title || 'Title'}
+						{item.platform ? ` @ ${item.platform}` : ''}
+					</h3>
 					{item.link && <p>{item.link}</p>}
 					{item.date && <p className="date-range">{item.date}</p>}
 					{item.description && <p>{item.description}</p>}

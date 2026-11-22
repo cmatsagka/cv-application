@@ -4,7 +4,7 @@ const PROJECTS_FIELDS = [
 	{ label: 'Project Title', name: 'title', type: 'text' },
 	{ label: 'Project link', name: 'link', type: 'url' },
 	{ label: 'Technologies Used', name: 'technologies', type: 'text' },
-	{ label: 'Date', name: 'date', type: 'number' },
+	{ label: 'Date', name: 'date', type: 'text' },
 	{
 		label: 'Description',
 		name: 'description',

@@ -33,6 +33,11 @@ function SingleRecordSection({
 					{!isPreview && (
 						<button
 							type="button"
+							aria-label={
+								isEditing
+									? `Save ${title || 'section'}`
+									: `Edit ${title || 'section'}`
+							}
 							onClick={() => setIsEditing((prev) => !prev)}
 						>
 							{isEditing ? <SaveIcon /> : <EditIcon />}

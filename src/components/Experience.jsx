@@ -33,7 +33,14 @@ function Experience({
 			onUpdateItem={onUpdateItem}
 			onDeleteItem={onDeleteItem}
 			isPreview={isPreview}
-			renderItem={(item) => (
+			renderItem={(item) => {
+				const dateRange = [
+					item.startDate?.trim(),
+					item.graduationDate?.trim() ||
+						(item.startDate?.trim() ? 'Present' : ''),
+				]
+					.filter(Boolean)
+					.join(' - ');
 				<div>
 					<h3>
 						{item.role || 'Role'}{' '}
@@ -42,12 +49,14 @@ function Experience({
 					{item.location && <p>{item.location}</p>}
 					{(item.startDate || item.endDate) && (
 						<p className="date-range">
-							{item.startDate} - {item.endDate || 'Present'},
+							{dateRange && (
+								<p className="date-range">{dateRange}</p>
+							)}
 						</p>
 					)}
 					{item.description && <p>{item.description}</p>}
-				</div>
-			)}
+				</div>;
+			}}
 		/>
 	);
 }

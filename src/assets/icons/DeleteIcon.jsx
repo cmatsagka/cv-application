@@ -10,6 +10,9 @@ export function DeleteIcon({ size = 16 }) {
 			stroke-width="2"
 			stroke-linecap="round"
 			stroke-linejoin="round"
+			aria-hidden="true"
+			focusable="false"
+			class="lucide lucide-trash preview-icon"
 		>
 			<path d="M18 6 6 18" />
 			<path d="m6 6 12 12" />
